@@ -1,0 +1,17 @@
+import { inject } from '@angular/core';
+import { Router, CanActivateFn } from '@angular/router';
+import { AuthService } from './auth.service';
+
+export const authGuard: CanActivateFn = (route, state) => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  // Replace 'isLoggedIn' with your actual boolean property/method from AuthService
+  if (authService.isLoggedIn()) {
+    return true;
+  } else {
+    // Redirect to home or login page
+    router.navigate(['/']);
+    return false;
+  }
+};

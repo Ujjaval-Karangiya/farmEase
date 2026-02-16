@@ -1,0 +1,70 @@
+
+/* TEAM */
+.team-section {
+    padding: 90px 0;
+    background: #eef5ef;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.6rem;
+    color: #1b5e20;
+    margin-bottom: 50px;
+}
+
+/* VIEWPORT */
+.marquee {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+/* MOVING BELT */
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 10s linear infinite;
+}
+
+/* CARD */
+.team-card {
+    width: 260px;
+    margin-right: 30px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    flex-shrink: 0;
+}
+
+    .team-card img {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        margin-bottom: 14px;
+    }
+
+    .team-card h4 {
+        color: #1b5e20;
+        margin-bottom: 4px;
+    }
+
+    .team-card span {
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.marquee:hover .marquee-track {
+    animation-play-state: paused;
+}
