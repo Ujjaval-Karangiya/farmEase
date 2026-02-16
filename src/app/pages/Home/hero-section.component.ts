@@ -35,10 +35,10 @@ import { RouterLink } from '@angular/router'
           </p>
           
           <div class="d-grid gap-3 d-md-flex justify-content-md-start mb-5">
-            <button type="button" class="btn btn-success btn-lg px-5 rounded-pill btn-hover-grow fw-bold shadow-sm">
+            <button type="button"routerLink="/" class="btn btn-success btn-lg px-5 rounded-pill btn-hover-grow fw-bold shadow-sm">
               Start Free Trial
             </button>
-            <button type="button" class="btn btn-outline-warning btn-lg px-5 rounded-pill btn-hover-grow border-2">
+            <button type="button" routerLink="/About"class="btn btn-outline-warnin btn-lg px-5 rounded-pill btn-hover-grow border-2">
               Explore Features
             </button>
           </div>
