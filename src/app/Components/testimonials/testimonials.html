@@ -1,95 +1,31 @@
-<section class="team-section">
-    <h2 class="section-title fw-bold">Developed By</h2>
+<section class="team-section py-5 overflow-hidden bg-light">
+    <div class="container text-center mb-5">
+        <span class="badge rounded-pill bg-success bg-opacity-10 text-success px-3 py-2 mb-2 fw-bold text-uppercase ls-1">The Crew</span>
+        <h2 class="display-5 fw-bold text-dark">Developed By</h2>
+        <div class="bg-success mx-auto rounded-pill" style="height: 4px; width: 50px;"></div>
+    </div>
 
-    <div class="marquee">
+    <div class="marquee-container">
         <div class="marquee-track">
-
-            <!-- SET 1 -->
-            <div class="team-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" />
-                <h4>Ujjaval Karangiya</h4>
-                <span>Developer</span>
+            <div class="team-card shadow-sm" *ngFor="let member of items">
+                <div class="card-glass p-4 text-center">
+                    <div class="img-wrapper mb-3 mx-auto">
+                        <img [src]="'https://ui-avatars.com/api/?name=' + member + '&background=2e7d32&color=fff'" class="rounded-circle shadow-sm" />
+                    </div>
+                    <h5 class="fw-bold mb-1 text-dark">{{member}}</h5>
+                    <span class="text-success small fw-semibold text-uppercase ls-1">Developer</span>
+                </div>
             </div>
 
-            <div class="team-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" />
-                <h4>Bhavin Prajapati</h4>
-                <span>Developer</span>
+            <div class="team-card shadow-sm" *ngFor="let member of items">
+                <div class="card-glass p-4 text-center">
+                    <div class="img-wrapper mb-3 mx-auto">
+                        <img [src]="'https://ui-avatars.com/api/?name=' + member + '&background=2e7d32&color=fff'" class="rounded-circle shadow-sm" />
+                    </div>
+                    <h5 class="fw-bold mb-1 text-dark">{{ member }}</h5>
+                    <span class="text-success small fw-semibold text-uppercase ls-1">Developer</span>
+                </div>
             </div>
-
-            <div class="team-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" />
-                <h4>Krish Patel</h4>
-                <span>Developer</span>
-            </div>
-
-            <div class="team-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" />
-                <h4>Mahir Gandhi</h4>
-                <span>Developer</span>
-            </div>
-
-            <div class="team-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" />
-                <h4>Jayraj Gohil</h4>
-                <span>Developer</span>
-            </div>
-
-
-            <div class="team-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" />
-                <h4>Naval Zala</h4>
-                <span>Developer</span>
-            </div>
-
-            <div class="team-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" />
-                <h4>Karan Kalaria</h4>
-                <span>Developer</span>
-            </div>
-            <!-- SET 2 (EXACT DUPLICATE OF SET 1) -->
-            <div class="team-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" />
-                <h4>Ujjaval Karangiya</h4>
-                <span>Developer</span>
-            </div>
-
-            <div class="team-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" />
-                <h4>Bhavin Prajapati</h4>
-                <span>Developer</span>
-            </div>
-
-            <div class="team-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" />
-                <h4>Krish Patel</h4>
-                <span>Developer</span>
-            </div>
-
-            <div class="team-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" />
-                <h4>Mahir Gandhi</h4>
-                <span>Developer</span>
-            </div>
-
-            <div class="team-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" />
-                <h4>Jayraj Gohil</h4>
-                <span>Developer</span>
-            </div>
-
-            <div class="team-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" />
-                <h4>Naval Zala</h4>
-                <span>Developer</span>
-            </div>
-
-            <div class="team-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" />
-                <h4>Karan Kalaria</h4>
-                <span>Developer</span>
-            </div>
-
         </div>
-</div>
+    </div>
 </section>

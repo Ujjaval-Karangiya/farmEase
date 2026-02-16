@@ -1,90 +1,101 @@
-<div class="profile-page-wrapper mt-5" *ngIf="currentUser">
-  <div class="container">
+<div class="profile-page-wrapper mt-5 bg-light-subtle min-vh-100 pb-5" *ngIf="currentUser">
+  <div class="container py-4">
     <div class="row justify-content-center">
       <div class="col-xl-10 animate-slide-up">
 
-        <div class="card border-0 shadow-lg rounded-5 overflow-hidden mb-4">
-          <div class="profile-banner" style="height: 150px; background: linear-gradient(45deg, #2e7d32, #81c784);"></div>
-          <div class="card-body p-4 p-md-5 pt-0 text-center position-relative mt-n5">
+        <div class="card border-0 shadow-lg rounded-5 overflow-hidden mb-5 bg-white">
+          <div class="profile-banner animate-gradient" style="height: 180px;"></div>
+          <div class="card-body p-4 p-md-5 pt-0 text-center position-relative">
+            
+            <div class="avatar-container">
+              <img [src]="'https://ui-avatars.com/api/?name=' + currentUser.name + '&background=2e7d32&color=fff&size=150&bold=true'"
+                   alt="Farmer Profile"
+                   class="img-fluid rounded-circle shadow-lg mb-3 border border-5 border-white bg-white avatar-main">
+              <div class="verified-badge" title="Verified Farmer">
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+            </div>
 
-            <img [src]="'https://ui-avatars.com/api/?name=' + currentUser.name + '&background=2e7d32&color=fff&size=150&bold=true'"
-                 alt="Profile Image"
-                 class="img-fluid rounded-circle shadow-lg mb-4 border border-4 border-white"
-                 style="width: 150px; height: 150px; margin-top: -75px; object-fit: cover;">
-
-            <h2 class="fw-bold text-dark mb-1">{{ currentUser.name | titlecase }}</h2>
-            <p class="text-success fw-semibold">
-              <i class="fa-solid fa-certificate me-2"></i>Verified FarmEase Member
+            <h1 class="display-6 fw-bold text-dark mb-1">{{ currentUser.name | titlecase }}</h1>
+            <p class="text-success fw-bold text-uppercase ls-1 small mb-4">
+              <i class="fa-solid fa-seedling me-2"></i>Verified FarmEase Member
             </p>
 
-            <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
-              <button (click)="editProfile()" class="btn btn-success rounded-pill px-4 fw-bold shadow-sm">
-                <i class="fa-solid fa-user-pen me-2"></i>Edit Profile
+            <div class="d-flex justify-content-center gap-3">
+              <button (click)="editProfile()" class="btn btn-success rounded-pill px-4 py-2 fw-bold shadow-sm btn-hover-grow">
+                <i class="fa-solid fa-user-gear me-2"></i>Edit My Account
               </button>
             </div>
           </div>
         </div>
 
-        <div class="row g-4 mb-4">
+        <div class="row g-4 mb-5">
           <div class="col-md-4">
-            <div class="card p-4 rounded-4 shadow-sm border-0 h-100 text-center cursor-pointer"  routerLink="/Cart">
-              <div class="icon-box bg-warning-subtle text-warning mx-auto mb-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                <i class="fa-solid fa-cart-shopping fs-4"></i>
+            <div class="card action-card p-4 rounded-4 shadow-sm border-0 h-100 text-center transition-all bg-white" routerLink="/Cart">
+              <div class="icon-box bg-warning-subtle text-warning mx-auto mb-3 rounded-circle d-flex align-items-center justify-content-center">
+                <i class="fa-solid fa-basket-shopping fs-3"></i>
               </div>
-              <h5 class="fw-bold mb-1">My Cart</h5>
-              <p class="text-muted small mb-0">3 items pending checkout</p>
+              <h5 class="fw-bold mb-1">My Basket</h5>
+              <p class="text-muted small mb-0">Active items for checkout</p>
             </div>
           </div>
 
           <div class="col-md-4">
-            <div class="card p-4 rounded-4 shadow-sm border-0 h-100 text-center cursor-pointer"
-                 routerLink="/Orders">
-              <div class="icon-box bg-primary-subtle text-primary mx-auto mb-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                <i class="fa-solid fa-truck-fast fs-4"></i>
+            <div class="card action-card p-4 rounded-4 shadow-sm border-0 h-100 text-center transition-all bg-white" routerLink="/Orders">
+              <div class="icon-box bg-primary-subtle text-primary mx-auto mb-3 rounded-circle d-flex align-items-center justify-content-center">
+                <i class="fa-solid fa-receipt fs-3"></i>
               </div>
-              <h5 class="fw-bold mb-1">Order List</h5>
-              <p class="text-muted small mb-0">View tracking & history</p>
+              <h5 class="fw-bold mb-1">Purchase History</h5>
+              <p class="text-muted small mb-0">Track shipments & invoices</p>
             </div>
           </div>
 
           <div class="col-md-4">
-            <div class="card p-4 rounded-4 shadow-sm border-0 h-100 text-center cursor-pointer"  routerLink="/WishlistComponent">
-              <div class="icon-box bg-danger-subtle text-danger mx-auto mb-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                <i class="fa-solid fa-heart fs-4"></i>
+            <div class="card action-card p-4 rounded-4 shadow-sm border-0 h-100 text-center transition-all bg-white" routerLink="/WishlistComponent">
+              <div class="icon-box bg-danger-subtle text-danger mx-auto mb-3 rounded-circle d-flex align-items-center justify-content-center">
+                <i class="fa-solid fa-heart-circle-check fs-3"></i>
               </div>
-              <h5 class="fw-bold mb-1">Wishlist</h5>
-              <p class="text-muted small mb-0">Saved seeds & tools</p>
+              <h5 class="fw-bold mb-1">Saved Items</h5>
+              <p class="text-muted small mb-0">Your favorite seeds & tools</p>
             </div>
           </div>
         </div>
 
         <div class="row g-4 text-start">
           <div class="col-md-6">
-            <div class="card p-4 rounded-4 bg-white shadow-sm border-0 h-100">
-              <small class="text-muted text-uppercase fw-bold d-block mb-3">Contact Info</small>
-              <p class="mb-2 text-dark"><i class="fa-solid fa-envelope text-success me-2"></i> {{ currentUser.email }}</p>
-              <p class="mb-0 text-dark"><i class="fa-solid fa-phone text-success me-2"></i> {{ currentUser.phone || 'Add Phone' }}</p>
+            <div class="card info-card p-4 rounded-4 bg-white shadow-sm border-0 h-100 border-start border-success border-4">
+              <small class="text-muted text-uppercase fw-bold d-block mb-3 ls-1">Communication</small>
+              <div class="d-flex align-items-center mb-3">
+                <div class="info-icon bg-light text-success me-3"><i class="fa-solid fa-envelope"></i></div>
+                <span class="text-dark fw-semibold">{{ currentUser.email }}</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <div class="info-icon bg-light text-success me-3"><i class="fa-solid fa-phone"></i></div>
+                <span class="text-dark fw-semibold">{{ currentUser.phone || 'Register Mobile Number' }}</span>
+              </div>
             </div>
           </div>
 
           <div class="col-md-6">
-            <div class="card p-4 rounded-4 bg-white shadow-sm border-0 h-100">
-              <small class="text-muted text-uppercase fw-bold d-block mb-2">Farm Details</small>
+            <div class="card info-card p-4 rounded-4 bg-white shadow-sm border-0 h-100 border-start border-warning border-4">
+              <small class="text-muted text-uppercase fw-bold d-block mb-3 ls-1">Farm Location & Logistics</small>
               <div class="d-flex align-items-center mb-3">
-                <i class="fa-solid fa-location-dot text-danger me-3 fs-5"></i>
-                <span class="fw-semibold text-dark">{{ currentUser.address || 'Location Not Set' }}</span>
+                <div class="info-icon bg-light text-danger me-3"><i class="fa-solid fa-location-dot"></i></div>
+                <span class="text-dark fw-semibold">{{ currentUser.address || 'Assign Delivery Address' }}</span>
               </div>
               <div class="d-flex align-items-center">
-                <i class="fa-solid fa-calendar-day text-primary me-3 fs-5"></i>
-                <span class="fw-semibold text-dark">DOB: {{ currentUser.dob || 'Not Set' }}</span>
+                <div class="info-icon bg-light text-primary me-3"><i class="fa-solid fa-calendar"></i></div>
+                <span class="text-dark fw-semibold">Member Since: {{ currentUser.dob || '2026' }}</span>
               </div>
             </div>
           </div>
-          <p class="text-center text-muted mt-5 small">© 2026 FarmEase Tech • Supporting Farmers</p>
         </div>
+
+        <p class="text-center text-muted mt-5 small animate-fade-in">
+          <i class="fa-solid fa-copyright me-1"></i> 2026 FarmEase Tech • Helping India Grow Sustainably
+        </p>
 
       </div>
     </div>
   </div>
 </div>
-

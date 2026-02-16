@@ -1,77 +1,85 @@
-<div class="split-screen">
-
-  <!-- LEFT VISUAL SECTION -->
-  <div class="visual-section">
-    <div class="overlay"></div>
-
-    <div class="content-wrapper">
-      <div class="grid">
-        <div class="box"></div><div class="box"></div><div class="box"></div>
-        <div class="box"></div><div class="box"></div><div class="box"></div>
-        <div class="box"></div><div class="box"></div><div class="box"></div>
+<div class="split-screen-container">
+  
+  <div class="visual-section d-none d-lg-flex">
+    <div class="visual-overlay"></div>
+    <div class="content-wrapper animate__animated animate__fadeIn">
+      <div class="grid-layout mb-4">
+        <div class="grid-box shadow-sm"></div>
+        <div class="grid-box shadow-sm"></div>
+        <div class="grid-box shadow-sm"></div>
+        <div class="grid-box shadow-sm"></div>
+        <div class="grid-box shadow-sm"></div>
+        <div class="grid-box shadow-sm"></div>
       </div>
 
-      <div class="text-center text-white">
-        <h3 class="fw-bold mb-2">Register Today</h3>
-        <p class="text-light opacity-75">
-          Secure access. Smart farming. Seamless experience.
+      <div class="text-center text-white px-5">
+        <h1 class="display-5 fw-bold mb-3 ls-1">Join the Harvest</h1>
+        <p class="fs-5 opacity-75 fw-light">
+          Secure access. Smart farming. Connect with our global network of sustainable farmers.
         </p>
       </div>
-
     </div>
   </div>
 
-  <!-- RIGHT AUTH SECTION -->
-  <div class="auth-section my-5">
-    <div class="auth-card">
-      <div class="brand-badge">Secure Registration</div>
-      <h2>Create Account</h2>
-      <p class="subtitle">Join our global network of smart farmers.</p>
+  <div class="auth-section d-flex align-items-center justify-content-center p-4">
+    <div class="auth-card animate__animated animate__fadeInRight shadow-lg my-5">
+      <div class="brand-badge mb-4">
+        <i class="fa-solid fa-seedling me-2"></i>New Member
+      </div>
+      
+      <h2 class="fw-bold text-dark mb-1">Create Account</h2>
+      <p class="text-muted mb-4 small">Fill in your details to start your journey.</p>
 
-      <form (submit)="$event.preventDefault()">
+      <form class="registration-form" (submit)="$event.preventDefault()">
+        
         <div class="form-floating mb-3">
-          <input #nameInput type="text" class="form-control rounded-3 bg-transparent border-2" placeholder="Full name" required>
-          <label>Full name</label>
+          <input #nameInput type="text" class="form-control" id="regName" placeholder="Full Name" required>
+          <label for="regName"><i class="fa-solid fa-user me-2"></i>Full Name</label>
         </div>
 
         <div class="form-floating mb-3">
-          <input #emailInput type="email" class="form-control rounded-3 bg-transparent border-2" placeholder="name@example.com" required>
-          <label>Email</label>
+          <input #emailInput type="email" class="form-control" id="regEmail" placeholder="Email" required>
+          <label for="regEmail"><i class="fa-solid fa-envelope me-2"></i>Email Address</label>
+        </div>
+
+        <div class="row g-2">
+          <div class="col-md-6">
+            <div class="form-floating mb-3">
+              <input #phoneInput type="tel" class="form-control" id="regPhone" placeholder="Phone">
+              <label for="regPhone"><i class="fa-solid fa-phone me-2"></i>Phone</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-floating mb-3">
+              <input #dobInput type="date" class="form-control" id="regDob">
+              <label for="regDob">Birth Date</label>
+            </div>
+          </div>
         </div>
 
         <div class="form-floating mb-3">
-          <input #phoneInput type="tel" class="form-control rounded-3 bg-transparent border-2" placeholder="Phone number">
-          <label>Phone number</label>
+          <input #addressInput type="text" class="form-control" id="regAddress" placeholder="Address">
+          <label for="regAddress"><i class="fa-solid fa-location-dot me-2"></i>Farm Address</label>
         </div>
 
         <div class="form-floating mb-3">
-          <input #dobInput type="date" class="form-control rounded-3 bg-transparent border-2">
-          <label>Date of Birth</label>
+          <textarea #bioInput class="form-control" id="regBio" placeholder="Bio" style="height: 80px"></textarea>
+          <label for="regBio">About your Farm</label>
         </div>
 
-        <div class="form-floating mb-3">
-          <input #addressInput type="text" class="form-control rounded-3 bg-transparent border-2" placeholder="Address">
-          <label>Address</label>
-        </div>
-
-        <div class="form-floating mb-3">
-          <textarea #bioInput class="form-control rounded-3 bg-transparent border-2" placeholder="About me" style="height: 100px"></textarea>
-          <label>About me</label>
-        </div>
-
-        <div class="form-floating mb-3">
-          <input #passInput type="password" class="form-control rounded-3 bg-transparent border-2" placeholder="Password" required>
-          <label>Password</label>
+        <div class="form-floating mb-4">
+          <input #passInput type="password" class="form-control" id="regPass" placeholder="Password" required>
+          <label for="regPass"><i class="fa-solid fa-lock me-2"></i>Password</label>
         </div>
 
         <button type="button"
                 (click)="onRegister(nameInput.value, emailInput.value, phoneInput.value, dobInput.value, addressInput.value, bioInput.value, passInput.value)"
-                class="btn btn-outline-success w-100 rounded-3 py-2 fw-bold">
-          Create Account
+                class="btn btn-success w-100 py-3 rounded-4 fw-bold shadow-sm btn-hover-grow">
+          Complete Registration
         </button>
 
-        <div class="auth-footer mt-3 text-center">
-          Already have an account? <a routerLink="/Login" class="text-success fw-bold">LOGIN</a>
+        <div class="auth-footer mt-4 text-center text-muted small">
+          Already a member? <a routerLink="/Login" class="text-success fw-bold text-decoration-none">LOG IN</a>
         </div>
       </form>
     </div>

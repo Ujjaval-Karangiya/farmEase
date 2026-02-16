@@ -9,158 +9,113 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   styles: [
     `
- .services-section {
-  background: #e6ffe8;
-  padding: 100px 0;
+.ls-2 { letter-spacing: 2px; }
+.leading-relaxed { line-height: 1.8; }
+
+.services-section {
+  background-color: #e6ffe8;
 }
 
-/* Section Title */
-.section-title {
-  font-size: 42px;
-  font-weight: 700;
-  line-height: 1.3;
-  color: #1b1b1b;
-}
-
-/* Green Button */
-.btn-theme {
-  background: #2e7d32;
-  color: #fff;
-  border-radius: 40px;
-  padding: 12px 28px;
-  font-weight: 600;
-  transition: 0.3s ease;
-}
-
-.btn-theme:hover {
-  background: #1b5e20;
-  color: #fff;
-}
-
-/* ===== OVAL CARD ===== */
+/* Service Card Styling */
 .service-card {
-  background: #e6ffe8;
-  border-radius: 10%;
-  border:2px solid black;
-  padding:55px 50px;
-  text-align: center;
-  transition: all 0.4s ease;
-  height: 100%;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
 }
 
-/* Icon circle */
-.icon-circle {
-  width: 70px;
-  height: 70px;
-  background: #66bb6a;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 25px;
-  font-size: 26px;
-  color: #fff;
-}
-
-/* Title */
-.service-card h5 {
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-
-/* Description */
-.service-card p {
-  font-size: 14px;
-  color: #6c757d;
-}
-
-/* Read More */
-.read-more {
-  margin-top: 15px;
-  display: inline-block;
-  font-weight: 600;
-  color: #2e7d32;
-  text-decoration: none;
+.icon-wrapper {
+  width: 60px;
+  height: 60px;
+  background: #f8fbf8;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .service-card:hover {
-  background: linear-gradient(135deg, #a8e063, #56ab2f);
-  color: #fff;
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-12px);
+  background: #ffffff;
+  box-shadow: 0 1.5rem 4rem rgba(46, 125, 50, 0.1) !important;
 }
 
-.service-card:hover p,
-.service-card:hover .read-more {
-  color: #fff;
+.service-card:hover .icon-wrapper {
+  background: #2e7d32;
+  color: #ffffff !important;
+  transform: rotateY(180deg);
+  box-shadow: 0 10px 20px rgba(46, 125, 50, 0.3);
 }
 
-.service-card:hover .icon-circle {
-  background: #fff;
-  color: #2e7d32;
+.service-card:hover .card-arrow {
+  opacity: 1;
+  transform: translateX(5px);
 }
 
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
+.animate-slide-up {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.transition-all {
+  transition: all 0.3s ease-in-out;
+}
 `,
   ],
   template: ` 
-<section class="services-section">
-  <div class="container">
+<section class="services-section py-5 position-relative overflow-hidden">
+  <div class="container py-4">
 
-    <!-- Top Row -->
-    <div class="row align-items-center mb-5">
+    <div class="row align-items-end mb-5 animate__animated animate__fadeIn">
       <div class="col-lg-6">
-        <span class="badge bg-success text-dark px-3 py-2 mb-3">
-          Our Services
+        <span class="badge rounded-pill bg-success bg-opacity-10 text-success px-3 py-2 mb-3 fw-bold text-uppercase ls-2">
+          What We Offer
         </span>
+        <h2 class="display-5 fw-bold text-dark lh-sm">
+          Empowering Modern Agriculture <br>
+          <span class="text-success">Innovation & Marketplace</span>
+        </h2>
+      </div>
 
-        <h2 class="section-title">
-  Empowering Modern Agriculture <br>
-  with Innovation & Marketplace
-</h2>
-</div>
-
-<div class="col-lg-6 text-lg-end mt-4 mt-lg-0">
-  <p class="text-muted">
-    FarmEase brings together the latest agricultural news, expert insights,
-    sustainable farming techniques, and a trusted marketplace for buying and
-    selling crops and machinery - connecting farmers, suppliers, and agri-enthusiasts
-    to simplify and strengthen modern agriculture.
-  </p>
-
-  <a class="btn btn-theme mt-2">
-    Explore Our Services →
-  </a>
-</div>
-
+      <div class="col-lg-5 offset-lg-1 mt-4 mt-lg-0">
+        <p class="text-muted fs-6 leading-relaxed mb-4">
+          FarmEase brings together the latest agricultural news, expert insights,
+          sustainable farming techniques, and a trusted marketplace to strengthen 
+          modern agriculture for everyone.
+        </p>
+        <a routerLink="/Products" class="btn btn-outline-success rounded-pill px-4 py-2 fw-bold transition-all">
+          Explore All Services <i class="fa-solid fa-arrow-right-long ms-2"></i>
+        </a>
+      </div>
     </div>
 
-    <!-- Cards -->
     <div class="row g-4">
+      <div class="col-lg-3 col-md-6 animate-slide-up" 
+           *ngFor="let service of services; let i = index"
+           [style.animation-delay]="i * 0.1 + 's'">
 
-      <div class="col-lg-3 col-md-6"
-           *ngFor="let service of services; let i = index">
-
-        <div class="service-card fade-in">
-
-          <div class="icon-circle">
-            <i class="bi" [ngClass]="service.icon"></i>
+        <div class="service-card h-100 p-4 rounded-4 border-0 shadow-sm transition-all bg-white">
+          <div class="icon-wrapper mb-4 d-flex align-items-center justify-content-center rounded-4 shadow-sm text-success">
+            <i [class]="'fa-solid fs-3 ' + service.icon"></i>
           </div>
 
-          <h5>{{ service.title }}</h5>
-          <p>{{ service.desc }}</p>
-
-    
-
+          <h5 class="fw-bold text-dark mb-3">{{ service.title }}</h5>
+          <p class="text-muted small mb-0 leading-normal">
+            {{ service.desc }}
+          </p>
+          
+          <div class="card-arrow mt-4 text-success opacity-0 transition-all">
+            <i class="fa-solid fa-circle-arrow-right fs-4"></i>
+          </div>
         </div>
 
       </div>
-
     </div>
 
   </div>
 </section>
-
 `,
 })
 export class Services {

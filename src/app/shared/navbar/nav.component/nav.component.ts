@@ -13,7 +13,7 @@ import { AuthService } from '../../../Auth/auth.service';
 export class NavComponent implements OnInit {
   // Use null initially so *ngIf works correctly in HTML
   currentUser: any = null;
-
+ cartCount: any = null;
   constructor(public auth: AuthService) { }
   private router = inject(Router);
 

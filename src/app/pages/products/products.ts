@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './products.css',
 })
 export class Products {
+  isLoading:any=true;
   products: any[] = [
 
     {
@@ -77,6 +78,7 @@ export class Products {
     }
 
   ];
+  refreshProducts(){}
 
   viewProduct(productName: string): void {
     console.log('Viewing product:', productName);

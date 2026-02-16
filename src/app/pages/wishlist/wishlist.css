@@ -1,56 +1,49 @@
-.card {
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  max-width: 300px;
+.ls-1 { letter-spacing: 1px; }
+
+/* Dashboard Cards */
+.wishlist-card {
   background: white;
-  font-family: sans-serif;
+  transition: all 0.3s ease;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+.wishlist-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1rem 3rem rgba(0,0,0,0.08) !important;
+}
+
+/* Custom Summary Card (FarmEase Gradient) */
+.summary-card {
+  background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
   position: relative;
+  overflow: hidden;
 }
 
-.avatar {
-  width: 50px;
-  height: 50px;
-  background: #e0e0e0;
-  border-radius: 50%;
-}
-
-.status {
-  width: 12px;
-  height: 12px;
-  background: #ccc;
-  border-radius: 50%;
+.summary-card::before {
+  content: "";
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -50%;
+  left: -20%;
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
 }
 
-  .status.online {
-    background: #4caf50;
-  }
-
-button {
-  margin-top: 15px;
-  padding: 8px 16px;
-  border: none;
-  background: #007bff;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
+/* Micro-interactions */
+.btn-hover-grow {
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-  button:hover {
-    background: #0056b3;
-  }
+.btn-hover-grow:hover:not([disabled]) {
+  transform: scale(1.05);
+}
 
-.bio {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #555;
+.bg-success-subtle {
+  background-color: #e8f5e9 !important;
+}
+
+/* Responsive Image Fixes */
+.img-frame {
+  width: 100%;
+  max-width: 120px;
 }

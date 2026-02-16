@@ -13,7 +13,8 @@ import { Profile } from './app/pages/profile/profile';
 import { Cart } from './app/pages/cart/cart';
 import { Orders } from './app/pages/order/order';
 import { WishlistComponent } from './app/pages/wishlist/wishlist';
-import { AgricultureStatsComponent } from './app/pages/agriculture-stats.component/agriculture-stats.component';
+import { DataComponent } from './app/pages/data-cs/data-cs';
+import { ItemManagerComponent } from './app/pages/item-manager.component/item-manager.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'HomePage', pathMatch: 'full' },
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'Orders', component: Orders, canActivate: [authGuard] },
   { path: 'Profile', component: Profile, canActivate: [authGuard] },
   { path: 'WishlistComponent', component: WishlistComponent, canActivate: [authGuard] },
-  { path: 'AgricultureStatsComponent', component: AgricultureStatsComponent, canActivate: [authGuard] },
+  { path: 'DataComponent', component:DataComponent , canActivate: [authGuard] },
+  { path: 'ItemManagerComponent', component:ItemManagerComponent , canActivate: [authGuard] },
 ];
 
 /* App configuration */

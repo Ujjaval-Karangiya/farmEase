@@ -1,69 +1,46 @@
-.orders-wrapper {
-  background-color: #f8fcf9;
-  min-height: 100vh;
+.ls-1 { letter-spacing: 1px; }
+
+/* Dashboard Card Styling */
+.order-card {
+  transition: all 0.3s ease;
 }
 
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
+.order-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1rem 3rem rgba(0,0,0,0.08) !important;
+}
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+/* Border Logic */
+.border-bottom-dashed {
+  border-bottom: 1px dashed #e9ecef;
+}
+
+.last-child-no-border:last-child {
+  border-bottom: none !important;
+}
+
+@media (min-width: 768px) {
+  .border-end-md {
+    border-right: 1px solid #f0f0f0;
   }
 }
 
-.animate-fade-in {
-  animation: fadeInUp 0.6s ease forwards;
+/* Status Badge Styles (Assuming you have logic for these) */
+.status-shipped { background: #e3f2fd; color: #1976d2; border-color: #bbdefb !important; }
+.status-delivered { background: #e8f5e9; color: #2e7d32; border-color: #c8e6c9 !important; }
+.status-pending { background: #fff3e0; color: #ef6c00; border-color: #ffe0b2 !important; }
+
+/* Micro-animations */
+.btn-hover-grow:hover {
+  transform: scale(1.03);
+  transition: transform 0.2s;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .animate-slide-up {
-  animation: fadeInUp 0.8s ease forwards;
-}
-
-.ls-1 {
-  letter-spacing: 0.5px;
-  font-size: 0.65rem;
-}
-
-/* Card Styling */
-.order-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid rgba(0,0,0,0.02) !important;
-}
-
-  .order-card:hover {
-    transform: scale(1.01);
-    box-shadow: 0 10px 20px rgba(46, 125, 50, 0.08) !important;
-  }
-
-.item-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-/* Badge Tweaks */
-.bg-success-subtle {
-  background-color: #e8f5e9;
-  color: #2e7d32;
-}
-
-.bg-primary-subtle {
-  background-color: #e3f2fd;
-  color: #1976d2;
-}
-
-.bg-danger-subtle {
-  background-color: #ffebee;
-  color: #c62828;
-}
-
-@media (max-width: 768px) {
-  .card-header {
-    font-size: 0.9rem;
-  }
+  animation: slideUp 0.6s ease-out forwards;
 }

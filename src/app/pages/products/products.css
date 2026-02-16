@@ -1,36 +1,41 @@
-
-/* HERO */
-.about-hero {
-  height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: url('/product_back.png') center/cover no-repeat;
-  position: relative;
+/* Animation Keyframes */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-  .about-hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.40);
-  }
-
-
-.hero-content {
-  position: relative;
-  text-align: center;
-  color: #fff;
-  z-index: 1;
-  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-  .hero-content h1 {
-    font-size: 4rem;
-  }
+.animate-slide-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
 
-  .hero-content p {
-    margin-top: 12px;
-    font-size: 1.2rem;
-  }
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-in;
+}
 
+/* Marketplace Styling */
+.ls-1 { letter-spacing: 1px; }
+
+.bg-success-subtle {
+  background-color: #e8f5e9 !important;
+}
+
+.transition-hover {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+
+/* Make sure the app-card scales nicely when the wrapper is hovered */
+.transition-hover:hover {
+  transform: translateY(-10px);
+}
+
+/* Product Hero Visuals */
+.products-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 50px 50px; /* Modern curved bottom */
+}

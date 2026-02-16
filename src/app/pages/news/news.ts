@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { NewsService } from '../../Auth/news.service';
 import { Card } from '../../Components/card/card';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [Card, CommonModule, RouterLink],
+  imports: [Card, CommonModule],
   templateUrl: './news.html',
   styleUrls: ['./news.css']
 })

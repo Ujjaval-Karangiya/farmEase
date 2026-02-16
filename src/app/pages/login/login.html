@@ -1,59 +1,64 @@
-<div class="split-screen">
-
-  <!-- LEFT VISUAL SECTION -->
-  <div class="visual-section">
-    <div class="content-wrapper">
-      <div class="grid">
-        <div class="box rounded-pill">
-          <div class="box rounded-pill">
-            <div class="box rounded-pill"></div>
+<div class="split-screen-container">
+  <div class="visual-section d-none d-lg-flex">
+    <div class="visual-overlay"></div>
+    <div class="content-wrapper animate__animated animate__fadeIn">
+      <div class="grid-animation">
+        <div class="blob-box first shadow-lg">
+          <div class="blob-box second shadow-lg">
+            <div class="blob-box third shadow-lg"></div>
           </div>
         </div>
       </div>
 
-      <div class="text-center text-white">
-        <h3 class="fw-bold mb-2">Good to See You Again</h3>
-        <p class="text-light opacity-75">
-          Log in and continue your smart farming journey.
+      <div class="text-center text-white px-5 mt-4">
+        <h1 class="display-5 fw-bold mb-3 ls-1">Welcome Back</h1>
+        <p class="fs-5 opacity-75 fw-light">
+          Continue your smart farming journey with real-time analytics and inventory control.
         </p>
-
       </div>
     </div>
   </div>
 
-  <!-- RIGHT LOGIN SECTION -->
-  <div class="auth-section">
-    <div class="auth-card">
-      <div class="brand-badge">Secure Login</div>
-      <h2>LogIn</h2>
-      <p class="subtitle">Enter your credentials to continue.</p>
+  <div class="auth-section d-flex align-items-center justify-content-center p-4 p-md-5">
+    <div class="auth-card animate__animated animate__fadeInRight shadow-lg">
+      <div class="brand-badge mb-4">
+        <i class="fa-solid fa-shield-halved me-2"></i>Secure Login
+      </div>
+      
+      <h2 class="fw-bold text-dark mb-1">Log In</h2>
+      <p class="text-muted mb-4">Enter your credentials to manage your field.</p>
 
       <form>
-        <div class="input-group">
-          <input type="email" #email required>
-          <label>Email Address</label>
+        <div class="custom-input-group mb-4">
+          <input type="email" #email required placeholder=" ">
+          <label><i class="fa-solid fa-envelope me-2"></i>Email Address</label>
+          <div class="focus-line"></div>
         </div>
 
-        <div class="input-group">
-          <input type="password" #password required>
-          <label>Password</label>
+        <div class="custom-input-group mb-3">
+          <input type="password" #password required placeholder=" ">
+          <label><i class="fa-solid fa-lock me-2"></i>Password</label>
+          <div class="focus-line"></div>
         </div>
 
-        <div class="options">
-          <a href="#">Forgot Password?</a>
+        <div class="d-flex justify-content-between align-items-center mb-4 px-1">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="remember">
+            <label class="form-check-label small text-muted" for="remember">Remember me</label>
+          </div>
+          <a href="#" class="text-success small fw-bold text-decoration-none transition-all">Forgot Password?</a>
         </div>
 
-        <button type="button" class="btn-signup" (click)="login(email.value, password.value)">
-          Login
+        <button type="button" class="btn btn-success btn-login w-100 py-3 rounded-4 fw-bold shadow-sm mb-4" 
+                (click)="login(email.value, password.value)">
+          Login Now
         </button>
 
-        <div class="auth-footer">
-          Don’t have an account?
-          <a routerLink="/Signup">Register</a>
+        <div class="auth-footer text-center text-muted small">
+          Don’t have an account? 
+          <a routerLink="/Signup" class="text-success fw-bold text-decoration-none ms-1">Create Account</a>
         </div>
       </form>
-
     </div>
   </div>
-
 </div>

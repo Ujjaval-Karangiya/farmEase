@@ -1,63 +1,63 @@
-<footer class="genz-footer" *ngIf="auth.isLoggedIn()">
-  <div class="container" >
+<footer class="genz-footer mt-auto" *ngIf="auth.isLoggedIn()">
+  <div class="container">
+    
+    <div class="glow-line animate-pulse"></div>
 
-    <!-- Top glow line -->
-    <div class="glow-line"></div>
+    <div class="row gy-5 py-5 mt-2">
 
-    <div class="row gy-5 py-5">
-
-      <!-- Brand / About -->
-      <div class="col-lg-4">
-        <h2 class="brand">
-          🌱 farm<span>Ease</span>
+      <div class="col-lg-4 animate-fade-in">
+        <h2 class="brand mb-3">
+          🌱 farm<span class="text-success-glow">Ease</span>
         </h2>
-        <p class="tagline">
+        <p class="tagline mb-4">
           Farming, but make it smart.  
           A modern agri-platform built for the next generation of farmers.
         </p>
 
-        <div class="chips">
-          <span>AgriTech</span>
-          <span>Marketplace</span>
-          <span>Smart Farming</span>
+        <div class="chips d-flex flex-wrap gap-2">
+          <span class="chip">#AgriTech</span>
+          <span class="chip">#Marketplace</span>
+          <span class="chip">#SmartFarming</span>
         </div>
       </div>
 
-      <!-- Navigation -->
-      <div class="col-lg-4">
-        <h6 class="section-title">Navigate</h6>
-        <ul class="nav-list">
-          <li><a routerLink="/">🏠 Home</a></li>
-          <li><a routerLink="/crops">🌾 Crops</a></li>
-          <li><a routerLink="/market">🛒 Market</a></li>
-          <li><a routerLink="/tools">🧠 Smart Tools</a></li>
-          <li><a routerLink="/about">📖 About</a></li>
+      <div class="col-lg-3 offset-lg-1 animate-fade-in">
+        <h6 class="section-title text-uppercase mb-4 ls-2">Navigate</h6>
+        <ul class="nav-list list-unstyled">
+          <li class="mb-2"><a routerLink="/" class="footer-link"><i class="fa-solid fa-house me-2"></i>Home</a></li>
+          <li class="mb-2"><a routerLink="/Products" class="footer-link"><i class="fa-solid fa-wheat-awn me-2"></i>Products</a></li>
+          <li class="mb-2"><a routerLink="/Cart" class="footer-link"><i class="fa-solid fa-cart-shopping me-2"></i>Market</a></li>
+          <li class="mb-2"><a routerLink="/ItemManagerComponent" class="footer-link"><i class="fa-solid fa-microchip me-2"></i>Inventory</a></li>
+          <li class="mb-2"><a routerLink="/About" class="footer-link"><i class="fa-solid fa-book-open me-2"></i>About</a></li>
         </ul>
       </div>
 
-      <!-- Dev / Contact -->
-      <div class="col-lg-4">
-        <h6 class="section-title">Built By</h6>
-        <p class="dev-name">Ujjaval Karangiya</p>
-        <p class="dev-desc">
-          Full-stack dev • Angular • .NET • TypeScript  
-          Turning ideas into clean, scalable web experiences.
-        </p>
+      <div class="col-lg-4 animate-fade-in">
+        <h6 class="section-title text-uppercase mb-4 ls-2">Built By</h6>
+        <div class="dev-card p-3 rounded-4 bg-white bg-opacity-5 border border-white border-opacity-10 shadow-sm">
+          <p class="dev-name fw-bold mb-1 fs-5">Ujjaval Karangiya</p>
+          <p class="dev-desc small text-muted mb-3">
+            Full-stack dev • Angular • .NET • TypeScript<br>
+            Turning ideas into clean, scalable web experiences.
+          </p>
 
-        <div class="socials">
-          <a href="#" title="GitHub">🐙</a>
-          <a href="#" title="LinkedIn">💼</a>
-          <a href="#" title="Email">📧</a>
+          <div class="socials d-flex gap-3">
+            <a href="#" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="#" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" class="social-btn" title="Email"><i class="fa-solid fa-envelope"></i></a>
+          </div>
         </div>
       </div>
 
     </div>
 
-    <!-- Bottom -->
-    <div class="bottom">
-      <span>© {{ year }} farmEase</span>
-      <span class="dot">•</span>
-      <span>Designed & Built with ☕ + ❤️</span>
+    <div class="bottom-bar d-flex flex-column flex-md-row justify-content-between align-items-center py-4 border-top border-white border-opacity-10 mt-4">
+      <div class="copyright small">
+        © 2026 <span class="fw-bold text-success">farmEase</span> <span class="mx-2 opacity-25">|</span> All Rights Reserved
+      </div>
+      <div class="credits small mt-2 mt-md-0">
+        Designed & Built with <i class="fa-solid fa-mug-hot text-warning mx-1"></i> + <i class="fa-solid fa-heart text-danger mx-1"></i>
+      </div>
     </div>
 
   </div>
