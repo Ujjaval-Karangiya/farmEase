@@ -1,37 +1,37 @@
 
 /* --- Dark Glassmorphism Effect --- */
 .glass-navbar-dark {
-    background: rgba(0, 0, 0, 0.6) !important; /* Dark semi-transparent */
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    padding: 10px 0;
-    transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.6) !important; /* Dark semi-transparent */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  padding: 10px 0;
+  transition: all 0.3s ease;
 }
 
 /* --- Nav Links Styling & Animation --- */
 .nav-animated {
-    color: rgba(255, 255, 255, 0.8) !important;
-    position: relative;
-    transition: all 0.3s ease;
-    border-radius: 50px;
+  color: rgba(255, 255, 255, 0.8) !important;
+  position: relative;
+  transition: all 0.3s ease;
+  border-radius: 50px;
 }
 
-/* Hover state */
-.nav-animated:hover {
+  /* Hover state */
+  .nav-animated:hover {
     color: #fff !important;
     background-color: rgba(255, 255, 255, 0.1);
-}
+  }
 
-/* Active State (routerLinkActive) */
-.nav-animated.active {
+  /* Active State (routerLinkActive) */
+  .nav-animated.active {
     color: #fff !important;
     background-color: rgba(76, 175, 80, 0.2); /* Slight green tint */
-}
+  }
 
-/* Underline Animation */
-.nav-animated::after {
+  /* Underline Animation */
+  .nav-animated::after {
     content: '';
     position: absolute;
     width: 0;
@@ -40,40 +40,40 @@
     left: 50%;
     background-color: #4caf50; /* Green color */
     transition: all 0.3s ease;
-}
+  }
 
-.nav-animated:hover::after,
-.nav-animated.active::after {
+  .nav-animated:hover::after,
+  .nav-animated.active::after {
     width: 60%;
     left: 20%;
-}
+  }
 
 /* --- Button Animations --- */
 .btn-animated {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.btn-animated:hover {
+  .btn-animated:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
+  }
 
 /* Specific styling for the green button */
 .btn-success {
-    background-color: #2e7d32;
-    border-color: #2e7d32;
+  background-color: #2e7d32;
+  border-color: #2e7d32;
 }
 
-.btn-success:hover {
+  .btn-success:hover {
     background-color: #1b5e20;
     border-color: #1b5e20;
-}
+  }
 
 /* --- Mobile Toggle Fix --- */
 .navbar-toggler {
-    border-color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .navbar-toggler-icon {
-    filter: invert(1); /* Makes the icon white */
+  filter: invert(1); /* Makes the icon white */
 }

@@ -11,20 +11,32 @@ import { AuthService } from '../../../Auth/auth.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  
-  // Inject services
+  // Use null initially so *ngIf works correctly in HTML
+  currentUser: any = null;
+
   constructor(public auth: AuthService) { }
   private router = inject(Router);
-  
+
   ngOnInit(): void {
-    // 1. Check if user is logged in
-    // Removed the automatic redirect to home, as this would 
-    // prevent users from accessing private routes like /News
+    // 1. Get the raw string from localStorage
+    const storedData = localStorage.getItem("CurrentUser");
+
+    // 2. Parse it only once
+    if (storedData) {
+      try {
+        this.currentUser = JSON.parse(storedData);
+        console.log("FarmEase User Loaded:", this.currentUser);
+      } catch (error) {
+        console.error("Error parsing user data:", error);
+      }
+    }
   }
 
-  // Method to handle logout and redirect
   logout(): void {
-    this.auth.logout(); // Call logout method from service
-    this.router.navigate(['/']); // Redirect to home
+    localStorage.removeItem("CurrentUser"); // Ensure storage is cleared
+    this.auth.logout();
+    this.currentUser = null;
+    this.router.navigate(['/']);
   }
+
 }

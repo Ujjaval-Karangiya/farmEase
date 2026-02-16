@@ -1,0 +1,36 @@
+
+/* HERO */
+.about-hero {
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('/product_back.png') center/cover no-repeat;
+  position: relative;
+}
+
+  .about-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.40);
+  }
+
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  color: #fff;
+  z-index: 1;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+  .hero-content h1 {
+    font-size: 4rem;
+  }
+
+  .hero-content p {
+    margin-top: 12px;
+    font-size: 1.2rem;
+  }
+

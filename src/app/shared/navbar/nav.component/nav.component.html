@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg fixed-top glass-navbar-dark">
+<nav class="navbar navbar-expand-lg position-relative stickey-top glass-navbar-dark">
   <div class="container">
-    
-    <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-light" routerLink="/">
+
+    <a class="col-sm-6 navbar-brand d-flex align-items-center gap-2 fw-bold text-light" routerLink="/">
       <img src="logo.png"
            alt="FarmEase Logo"
            class="img-fluid rounded-circle shadow"
@@ -16,8 +16,8 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-2">
+    <div class="col-sm-6 collapse navbar-collapse mx-auto" id="navbarNav">
+      <ul class="navbar-nav mb-2 mb-lg-0 gap-2">
         <li class="nav-item">
           <a class="nav-link fw-semibold px-3 py-2 nav-animated"
              routerLink="/"
@@ -40,8 +40,21 @@
             News
           </a>
         </li>
+        <li class="nav-item" *ngIf="auth.isLoggedIn()">
+          <a class="nav-link fw-semibold px-3 py-2 nav-animated"
+             routerLink="/Products"
+             routerLinkActive="active">
+            Products
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="auth.isLoggedIn()">
+          <a class="nav-link fw-semibold px-3 py-2 nav-animated"
+             routerLink="/AgricultureStatsComponent"
+             routerLinkActive="active">
+            Cold Storage
+          </a>
+        </li>
       </ul>
-
       <div class="d-flex gap-2">
         <button class="btn btn-outline-warning rounded-4 fw-semibold btn-animated"
                 *ngIf="!auth.isLoggedIn()"
@@ -49,18 +62,181 @@
           Registration
         </button>
 
-        <button class="btn btn-outline-success rounded-4 fw-semibold shadow btn-animated"
+        <button class="btn btn-success rounded-4 fw-semibold shadow btn-animated"
                 *ngIf="!auth.isLoggedIn()"
                 routerLink="/Login">
+
           Login
         </button>
 
-        <button class="btn btn-outline-danger rounded-4 fw-semibold btn-animated"
-                *ngIf="auth.isLoggedIn()"
-                (click)="logout()">
+        <!--<button class="btn btn-outline-danger rounded-4 fw-semibold btn-animated"
+                        *ngIf="auth.isLoggedIn()"
+                        (click)="logout()">
           LogOut
+        </button>-->
+        <button class="btn position-relative"
+                data-bs-toggle="modal"
+                data-bs-target="#cartModal"
+                routerLink="/Cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </button>
+
+
+        <button class="btn btn-dark  shadow-lg toggle-dashboard" *ngIf="auth.isLoggedIn()"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#canva"
+                aria-controls="canva"
+                style="top: 20px; right: 20px; z-index: 1050; width: 50px; height: 50px;">
+          <i class="fa-solid fa-user-gear"></i>
         </button>
       </div>
+
     </div>
   </div>
 </nav>
+<div class="offcanvas offcanvas-end" id="canva" style="width:360px; background:#fdfdfb;" *ngIf="currentUser">
+  <div class="offcanvas-header border-bottom border-light-subtle py-4">
+    <div>
+      <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-light" routerLink="/">
+        <span class="fs-4">
+          <span class="text-success">farm</span>
+          <span class="text-warning">Ease</span>
+        </span>
+      </a>
+      <small class="text-secondary">Farmer's Control Center</small>
+    </div>
+    <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+  <div class="offcanvas-body d-flex flex-column p-4 gap-4">
+
+    <div class="p-3 rounded-4 shadow-sm border border-white">
+      <div class="d-flex align-items-center gap-3 mb-3">
+        <img [src]="'https://ui-avatars.com/api/?name=' + currentUser.name + '&background=2e7d32&color=fff'"
+             class="rounded-circle border border-2 border-success shadow-sm"
+             style="width:55px; height:55px; object-fit: cover;" alt="Farmer Profile" />
+
+        <div class="overflow-hidden">
+          <div class="fw-bold text-dark text-truncate">{{ currentUser?.name | titlecase }}</div>
+          <small class="text-secondary text-truncate d-block">{{ currentUser?.email }}</small>
+        </div>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-dark btn-sm w-50 rounded-4" routerLink="/Profile" data-bs-dismiss="offcanvas">
+          Profile
+        </button>
+
+        <button class="btn btn-outline-danger btn-sm w-50 rounded-pill fw-semibold btn-animated"
+                (click)="logout()"
+                data-bs-dismiss="offcanvas">
+          <i class="fa-solid fa-right-from-bracket me-1"></i> LogOut
+        </button>
+      </div>
+    </div>
+    <small class="text-uppercase text-muted fw-bold" style="font-size: 0.75rem; letter-spacing: 1px;">Field Management</small>
+    <div class="list-group list-group-flush mt-2">
+      <a href="#" class="list-group-item list-group-item-action bg-transparent text-dark border-0 px-0 d-flex align-items-center"
+         data-bs-toggle="modal" data-bs-target="#ordersModal">
+        <span class="me-3">🚜</span> My Equipment Orders
+      </a>
+      <a href="#" class="list-group-item list-group-item-action bg-transparent text-dark border-0 px-0 d-flex align-items-center"
+         data-bs-toggle="modal" data-bs-target="#wishlistModal">
+        <span class="me-3">🌱</span> Saved Seeds
+      </a>
+      <a href="#" class="list-group-item list-group-item-action bg-transparent text-dark border-0 px-0 d-flex align-items-center">
+        <span class="me-3">🌦️</span> Weather Alerts
+      </a>
+      <a href="#" class="list-group-item list-group-item-action bg-transparent text-dark border-0 px-0 d-flex align-items-center">
+        <span class="me-3">📊</span> Market Rates (Mandi)
+      </a>
+    </div>
+
+    <div class="mt-5 m-1 p-4 rounded-4 text-center" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border: 1px dashed #2e7d32;">
+      <p class="mb-1 fw-bold text-success">🌾 Monsoon Special</p>
+      <p class="small text-dark mb-3">Get 20% off Organic Fertilizers</p>
+      <button class="btn btn-success btn-sm rounded-pill w-100 fw-bold shadow-sm">
+        View Offers
+      </button>
+    </div>
+    <small class="text-muted d-block mt-3 text-center" style="font-size: 0.7rem;">
+      © 2026 FarmEase Tech • Supporting Farmers
+    </small>
+  </div>
+</div>
+
+<div class="modal fade h-25" id="profileModal">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content border-0 rounded-5 shadow-lg" *ngIf="currentUser">
+
+      <div class="modal-header border-0 p-0 ">
+        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3 shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body p-4 pt-0">
+        <div class="text-center position-relative">
+          <div class="d-inline-block p-1 rounded-circle bg-white shadow">
+            <img [src]="'https://ui-avatars.com/api/?name=' + currentUser.name + '&background=2e7d32&color=fff&size=128&bold=true'"
+                 class="rounded-circle border border-3 border-white"
+                 style="width: 110px; height: 110px; object-fit: cover;"
+                 alt="Farmer Profile">
+          </div>
+          <h4 class="fw-bold text-dark mt-3 mb-1">{{ currentUser?.name | titlecase }}</h4>
+          <span class="badge bg-success-subtle text-success rounded-pill px-3">Verified Farmer</span>
+        </div>
+
+        <div class="row g-4 mt-2">
+          <div class="col-12 d-flex align-items-center gap-3 p-3 rounded-4 bg-light-subtle border border-white shadow-sm">
+            <div class="icon-box bg-success text-white rounded-3 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="overflow-hidden">
+              <small class="text-uppercase text-muted fw-bold d-block" style="font-size: 0.65rem;">Email Address</small>
+              <span class="text-dark fw-semibold text-truncate d-block">{{ currentUser?.email }}</span>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="p-3 rounded-4 bg-light-subtle border border-white shadow-sm h-100">
+              <small class="text-uppercase text-muted fw-bold d-block mb-1" style="font-size: 0.65rem;">Contact</small>
+              <span class="text-dark fw-semibold small"><i class="fa-solid fa-phone text-success me-2"></i>{{ currentUser?.phone || '+91 XXXXX-XXXXX' }}</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="p-3 rounded-4 bg-light-subtle border border-white shadow-sm h-100">
+              <small class="text-uppercase text-muted fw-bold d-block mb-1" style="font-size: 0.65rem;">Birth Date</small>
+              <span class="text-dark fw-semibold small"><i class="fa-solid fa-calendar-day text-success me-2"></i>{{ currentUser?.dob || 'Not Set' }}</span>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="p-3 rounded-4 bg-light-subtle border border-white shadow-sm">
+              <small class="text-uppercase text-muted fw-bold d-block mb-1" style="font-size: 0.65rem;">Farm Location</small>
+              <span class="text-dark small">
+                <i class="fa-solid fa-location-dot text-danger me-2"></i>{{ currentUser?.address || 'Update your farm location in settings' }}
+              </span>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="p-3 rounded-4 border border-dashed border-success bg-success bg-opacity-10">
+              <small class="text-uppercase text-success fw-bold d-block mb-1" style="font-size: 0.65rem;">About the Farm</small>
+              <p class="mb-0 text-dark italic small" style="line-height: 1.4;">
+                "{{ currentUser?.bio || 'This farmer has not added a description yet.' }}"
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer border-0 p-4 pt-0 justify-content-between">
+        <button type="button" class="btn btn-light rounded-pill px-4 fw-semibold shadow-sm" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success rounded-pill px-4 fw-bold shadow-sm btn-animated">
+          <i class="fa-solid fa-user-pen me-2"></i>Edit Profile
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+

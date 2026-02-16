@@ -1,0 +1,29 @@
+<!-- HERO -->
+<section class="about-hero">
+
+</section>
+<div class="container py-4">
+  <div class="hero-content text-secondary mt-5">
+    <h1 class=" text-secondary">Products FarmEase</h1>
+    <p class=" text-secondary">Explore Products</p>
+  </div>
+
+
+  <div class="row g-4">
+    <div class="col-12 col-md-6 col-lg-4" *ngFor="let product of products">
+      <app-card [data]="product"></app-card>
+    </div>
+  </div>
+
+  <!--<div  class="text-center my-5">-->
+    <!--<div class="spinner-border text-success" role="status">-->
+      <!--<span class="visually-hidden">Loading news...</span>-->
+    <!--</div>-->
+    <!--<p class="mt-2 text-muted">Fetching latest updates...</p>-->
+
+    <!--<button class="btn btn-success btn-lg px-5 shadow-sm" routerLink='/News'>
+      load data
+    </button>-->
+
+  <!--</div>-->
+</div>

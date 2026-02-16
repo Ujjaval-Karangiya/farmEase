@@ -22,38 +22,58 @@
   </div>
 
   <!-- RIGHT AUTH SECTION -->
-  <div class="auth-section">
+  <div class="auth-section my-5">
     <div class="auth-card">
       <div class="brand-badge">Secure Registration</div>
       <h2>Create Account</h2>
       <p class="subtitle">Join our global network of smart farmers.</p>
 
-      <form>
-        <div class="input-group">
-          <input type="text" #name required>
-          <label>Full Name</label>
+      <form (submit)="$event.preventDefault()">
+        <div class="form-floating mb-3">
+          <input #nameInput type="text" class="form-control rounded-3 bg-transparent border-2" placeholder="Full name" required>
+          <label>Full name</label>
         </div>
 
-        <div class="input-group">
-          <input type="email" #email required>
-          <label>Email Address</label>
+        <div class="form-floating mb-3">
+          <input #emailInput type="email" class="form-control rounded-3 bg-transparent border-2" placeholder="name@example.com" required>
+          <label>Email</label>
         </div>
 
-        <div class="input-group">
-          <input type="password" #password required>
+        <div class="form-floating mb-3">
+          <input #phoneInput type="tel" class="form-control rounded-3 bg-transparent border-2" placeholder="Phone number">
+          <label>Phone number</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input #dobInput type="date" class="form-control rounded-3 bg-transparent border-2">
+          <label>Date of Birth</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input #addressInput type="text" class="form-control rounded-3 bg-transparent border-2" placeholder="Address">
+          <label>Address</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <textarea #bioInput class="form-control rounded-3 bg-transparent border-2" placeholder="About me" style="height: 100px"></textarea>
+          <label>About me</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input #passInput type="password" class="form-control rounded-3 bg-transparent border-2" placeholder="Password" required>
           <label>Password</label>
         </div>
 
-        <button type="button" class="btn-signup" (click)="signup(name.value, email.value, password.value)">
-          Create My Account
+        <button type="button"
+                (click)="onRegister(nameInput.value, emailInput.value, phoneInput.value, dobInput.value, addressInput.value, bioInput.value, passInput.value)"
+                class="btn btn-outline-success w-100 rounded-3 py-2 fw-bold">
+          Create Account
         </button>
 
-        <div class="auth-footer">
-          Already have an account?
-          <a routerLink="/Login">LOGIN</a>
+        <div class="auth-footer mt-3 text-center">
+          Already have an account? <a routerLink="/Login" class="text-success fw-bold">LOGIN</a>
         </div>
       </form>
-
     </div>
   </div>
 

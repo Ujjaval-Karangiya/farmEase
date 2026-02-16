@@ -1,0 +1,108 @@
+ 
+.profile-page-wrapper {
+  background: linear-gradient(135deg, #f0f7f0 0%, #ffffff 100%);
+  min-height: 100vh;
+}
+
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.profile-banner {
+  height: 180px;
+  background: linear-gradient(45deg, #1b5e20, #43a047);
+  background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+}
+
+.mt-n5 {
+  margin-top: -85px !important;
+}
+
+.avatar-wrapper img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  background-color: white;
+}
+
+
+.ls-1 {
+  letter-spacing: 1px;
+  font-size: 0.75rem;
+}
+
+.info-card {
+  transition: all 0.3s ease;
+}
+
+  .info-card:hover {
+    transform: translateY(-5px);
+    background-color: #ffffff !important;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+  }
+
+.transition-scale {
+  transition: transform 0.2s ease;
+}
+
+  .transition-scale:hover {
+    transform: scale(1.05);
+  }
+
+.border-dashed {
+  border-style: dashed !important;
+}
+
+
+.dashboard-card {
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.05) !important;
+}
+
+  .dashboard-card:hover {
+    background-color: #f8fff9 !important;
+    border-color: #2e7d32 !important;
+    transform: translateY(-8px);
+  }
+
+.icon-box {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.bg-warning-subtle {
+  background-color: #fff3cd;
+}
+
+.bg-primary-subtle {
+  background-color: #cfe2ff;
+}
+
+.bg-danger-subtle {
+  background-color: #f8d7da;
+}
+
+.transition-scale {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ls-1 {
+  letter-spacing: 1px;
+}

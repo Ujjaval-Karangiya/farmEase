@@ -14,6 +14,8 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 // Adjust these paths to your project
 import { NavComponent } from './shared/navbar/nav.component/nav.component';
 import { FooterComponent } from './shared/footer/footer.component/footer.component';
+import { AuthService } from './Auth/auth.service';
+import { inject } from '@angular/core';
 
 
 @Component({
@@ -31,6 +33,7 @@ export class App implements AfterViewInit {
   @ViewChild('mainWrapper') mainWrapper!: ElementRef;
 
   constructor(
+    public auth: AuthService,
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef,
     private router: Router,        // inject router

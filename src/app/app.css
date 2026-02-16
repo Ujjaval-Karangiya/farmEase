@@ -109,6 +109,7 @@
 .main-content {
   display: block;
   width: 100%;
+  overflow-x:hidden;
   /* Gentle fade-in so the site doesn't "snap" in */
   animation: fadeInSite 0.8s ease-out forwards;
 }
