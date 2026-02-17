@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../Auth/auth.service';
+import { AuthService, UserRole } from '../../Auth/auth.service';
+
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +11,9 @@ import { AuthService } from '../../Auth/auth.service';
   styleUrl: './signup.css',
 })
 export class Signup implements OnInit {
+
   private router = inject(Router);
+
   constructor(public auth: AuthService) { }
 
   ngOnInit(): void {
@@ -19,45 +22,71 @@ export class Signup implements OnInit {
     }
   }
 
-  // Updated method to accept all form fields
-  onRegister(name: string, email: string, phone: string, dob: string, address: string, bio: string, pass: string) {
+  onRegister(
+    name: string,
+    email: string,
+    phone: string,
+    dob: string,
+    address: string,
+    bio: string,
+    pass: string,
+    roleValue: string   // 👈 accept string
+  ) {
 
-    // Simple Validation
+    const role = roleValue as UserRole;  // 👈 cast here safely
+
+
+    // 1️⃣ Basic Validation
     if (!name.trim() || !email.trim() || !pass.trim()) {
       alert('Name, Email, and Password are required for FarmEase registration.');
       return;
     }
 
-    // 1. Get existing users
-    const users = JSON.parse(localStorage.getItem('User') || '[]');
+    // 2️⃣ Get existing users
+    const users = JSON.parse(localStorage.getItem('Users') || '[]');
 
-    // 2. Check for duplicate email
+    // 3️⃣ Check duplicate email
     const exists = users.find((u: any) => u.email === email.trim());
     if (exists) {
       alert('This email is already registered with FarmEase.');
       return;
     }
 
-    // 3. Create full Farmer profile object
-    const newFarmer = {
+    // 4️⃣ Create new user object
+    const newUser = {
       id: `usr-${Date.now()}`,
-      name: name.trim(),
+      fullName: name.trim(),
       email: email.trim(),
       phone: phone.trim(),
-      dob: dob,
+      birthDate: dob,
       address: address.trim(),
       bio: bio.trim(),
       password: pass.trim(),
+      role: role,
       joinedDate: new Date().toLocaleDateString()
     };
 
-    // 4. Save to localStorage
-    users.push(newFarmer);
-    localStorage.setItem('User', JSON.stringify(users));
+    // 5️⃣ Save to localStorage
+    users.push(newUser);
+    localStorage.setItem('Users', JSON.stringify(users));
 
-    alert('Welcome to the FarmEase family! Please login to continue.');
+    console.log('Registered New User:', newUser);
 
-    // 5. Navigate to Login
-    this.router.navigate(['/Login']);
+  
+
+    // 7️⃣ Redirect by role
+    this.redirectByRole(role);
+  }
+
+  private redirectByRole(role: string) {
+    if (role === 'farmer') {
+      this.router.navigate(['/Login']);
+    } else if (role === 'customer') {
+      this.router.navigate(['/Login']);
+    } else if (role === 'admin') {
+      this.router.navigate(['/Login']);
+    } else {
+      this.router.navigate(['/Login']);
+    }
   }
 }

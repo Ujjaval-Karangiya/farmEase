@@ -1,0 +1,106 @@
+<div class="inventory-dashboard container-fluid py-5 px-lg-5">
+  <div class="row mb-5 text-center animate__animated animate__fadeInDown">
+    <h1 class="display-4 fw-bold"><span class="text-success">Stock</span> Control</h1>
+    <p class="text-muted">Managing assets for: <strong>{{ currentUser }}</strong></p>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-xl-4 animate__animated animate__fadeInLeft">
+      <div class="glass-card shadow-lg p-4">
+        <h5 class="text-success fw-bold mb-4">
+          <i class="fa-solid" [ngClass]="isEditing ? 'fa-edit' : 'fa-plus-circle'"></i>
+          {{ isEditing ? 'Edit Equipment' : 'Add Equipment' }}
+        </h5>
+
+        <div class="mb-3">
+          <label class="form-label small fw-bold">Item Name</label>
+          <input type="text" class="form-control rounded-3" [(ngModel)]="newItem.name" placeholder="e.g. Mini Tractor">
+        </div>
+
+        <div class="row g-2 mb-3">
+          <div class="col-6">
+            <label class="form-label small fw-bold">Price (₹)</label>
+            <input type="number" class="form-control" [(ngModel)]="newItem.price">
+          </div>
+          <div class="col-6">
+            <label class="form-label small fw-bold">Quantity</label>
+            <input type="number" class="form-control" [(ngModel)]="newItem.quantity">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label small fw-bold">Category</label>
+          <select class="form-select" [(ngModel)]="newItem.category">
+            <option value="Tractor">🚜 Tractor</option>
+            <option value="Seeds">🌱 Seeds</option>
+            <option value="Tools">🛠️ Tools</option>
+          </select>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label small fw-bold">Image URL</label>
+          <input type="text" class="form-control" [(ngModel)]="newItem.image" placeholder="https://...">
+        </div>
+
+        <button class="btn btn-success w-100 py-3 rounded-pill fw-bold btn-hover-grow" (click)='handleSave()'>
+          {{ isEditing ? 'Update Item' : 'Save to Catalog' }}
+        </button>
+        <button *ngIf="isEditing" class="btn btn-link w-100 mt-2 text-muted" (click)="resetForm()">Cancel</button>
+      </div>
+    </div>
+
+    <div class="col-xl-8 animate__animated animate__fadeInUp">
+      <div class="row g-3 mb-4">
+        <div class="col-md-6">
+          <div class="stats-card bg-white p-4 rounded-4 shadow-sm border-start border-success border-5">
+            <small class="text-muted fw-bold">WAREHOUSE VALUE</small>
+            <h2 class="fw-bold mb-0">₹{{ getTotalValue() | number }}</h2>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="stats-card bg-white p-4 rounded-4 shadow-sm border-start border-warning border-5">
+            <small class="text-muted fw-bold">ITEMS TRACKED</small>
+            <h2 class="fw-bold mb-0">{{ items.length }} SKU</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-4 shadow-lg overflow-hidden">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="bg-light">
+            <tr class="small fw-bold">
+              <th class="px-4 py-4">STOCK IDENTITY</th>
+              <th>TYPE</th>
+              <th class="text-center">IN STOCK</th>
+              <th>VALUATION</th>
+              <th class="text-end pe-4">MANAGE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of items" class="stock-row">
+              <td class="px-4">
+                <div class="d-flex align-items-center">
+                  <img [src]="item.image || 'assets/placeholder.png'" class="rounded-3 me-3" style="width: 45px; height: 45px; object-fit: cover;">
+                  <div>
+                    <div class="fw-bold">{{ item.name }}</div>
+                    <small class="text-muted">ID: {{ item.id }}</small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge rounded-pill bg-success bg-opacity-10 text-success px-3">{{ item.category }}</span></td>
+              <td class="text-center fw-bold">{{ item.quantity }}</td>
+              <td>
+                <div class="fw-bold">₹{{ (item.quantity * item.price) | number }}</div>
+                <small class="text-muted">₹{{ item.price }}/ea</small>
+              </td>
+              <td class="text-end pe-4">
+                <button class="btn btn-sm btn-outline-primary me-2" (click)="editItem(item)"><i class="fa-solid fa-pen"></i></button>
+                <button class="btn btn-action-delete" (click)="deleteItem(item.id)"><i class="fa-solid fa-trash"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

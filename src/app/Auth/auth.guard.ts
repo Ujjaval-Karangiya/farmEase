@@ -1,17 +1,24 @@
 import { inject } from '@angular/core';
-import { Router, CanActivateFn } from '@angular/router';
-import { AuthService } from './auth.service';
+import { CanActivateFn, Router } from '@angular/router';
+import { AuthService, UserRole } from './auth.service';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = (route) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // Replace 'isLoggedIn' with your actual boolean property/method from AuthService
-  if (authService.isLoggedIn()) {
-    return true;
-  } else {
-    // Redirect to home or login page
-    router.navigate(['/']);
-    return false;
+  const userRole = authService.getRole();
+  const allowedRoles = route.data['roles'] as Array<UserRole>;
+
+  // 1. Check if logged in
+  if (!authService.isLoggedIn()) {
+    return router.parseUrl('/Login');
   }
+
+  // 2. Check if the route has specific role requirements
+  if (allowedRoles && !allowedRoles.includes(userRole!)) {
+    alert('Access Denied: You do not have the required permissions.');
+    return router.navigate(['/']); // Redirect to home if unauthorized
+  }
+
+  return true;
 };

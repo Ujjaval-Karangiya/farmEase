@@ -1,0 +1,206 @@
+<div class="admin-wrapper bg-light">
+  <div class="admin-layout">
+    <div class="col-sm-4 nav-side shadow">
+      <div class="header p-4 border-bottom border-white border-opacity-10">
+
+        <div class="badge bg-success bg-opacity-25 w-100 fs-5">
+          <i class="fa-solid fa-user-shield me-1"></i> {{ currentAdminName }}
+        </div>
+      </div>
+      <nav class="p-3 nav flex-column gap-2">
+        <button class="nav-btn w-100 border-0 text-start" (click)="setPage('dashboard')" [class.active]="activePage === 'dashboard'">
+          <i class="fa-solid fa-chart-line me-2"></i> Dashboard
+        </button>
+        <button class="nav-btn w-100 border-0 text-start" (click)="setPage('farmers')" [class.active]="activePage === 'farmers'">
+          <i class="fa-solid fa-wheat-awn me-2"></i> Farmers <span class="badge bg-white text-dark float-end">{{farmers.length}}</span>
+        </button>
+        <button class="nav-btn w-100 border-0 text-start" (click)="setPage('customers')" [class.active]="activePage === 'customers'">
+          <i class="fa-solid fa-users me-2"></i> Customers <span class="badge bg-white text-dark float-end">{{customers.length}}</span>
+        </button>
+        <button class="nav-btn w-100 border-0 text-start" (click)="setPage('machinery')" [class.active]="activePage === 'machinery'">
+          <i class="fa-solid fa-tractor me-2"></i> Machinery
+        </button>
+      </nav>
+    </div>
+
+    <main class="col-sm-8 admin-content p-4">
+
+      <section *ngIf="activePage==='dashboard'" class="animate__animated animate__fadeIn">
+        <h2 class="fw-bold mb-4">Operational Overview</h2>
+        <div class="row g-4">
+          <div class="col-md-4" (click)="setPage('farmers')" style="cursor: pointer;">
+            <div class="glass-stat-card card border-0 shadow-sm p-4 text-center h-100">
+              <div class="text-success mb-2"><i class="fa-solid fa-wheat-awn fs-1"></i></div>
+              <h1 class="display-4 fw-bold mb-0">{{farmers.length}}</h1>
+              <p class="text-muted text-uppercase fw-bold small">Total Farmers</p>
+            </div>
+          </div>
+          <div class="col-md-4" (click)="setPage('customers')" style="cursor: pointer;">
+            <div class="glass-stat-card card border-0 shadow-sm p-4 text-center h-100">
+              <div class="text-primary mb-2"><i class="fa-solid fa-users fs-1"></i></div>
+              <h1 class="display-4 fw-bold mb-0">{{customers.length}}</h1>
+              <p class="text-muted text-uppercase fw-bold small">Total Customers</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="glass-stat-card card border-0 shadow-sm p-4 text-center h-100 bg-success text-white">
+              <div class="text-white-50 mb-2"><i class="fa-solid fa-indian-rupee-sign fs-1"></i></div>
+              <h1 class="display-5 fw-bold mb-0">₹{{ getTotalValue() | number }}</h1>
+              <p class="text-white-50 text-uppercase fw-bold small">Total Fleet Value</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section *ngIf="activePage==='farmers' || activePage==='customers'" class="animate__animated animate__fadeIn">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="text-capitalize fw-bold">{{ activePage }} Directory</h2>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-xl-3 col-lg-4 col-md-6" *ngFor="let user of (activePage === 'farmers' ? farmers : customers)">
+            <div class="card border-0 shadow-sm rounded-4 text-center p-4 position-relative h-100">
+              <button class="btn btn-outline-danger btn-sm rounded-circle position-absolute top-0 end-0 m-3 border-0"
+                      (click)="handleUserDelete(user.email)" title="Remove User">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+              <img [src]="user.avatar" class="rounded-circle mx-auto mb-3 border border-4 border-light shadow-sm"
+                   style="width: 80px; height: 80px; object-fit: cover;" [alt]="user.fullName">
+              <h5 class="fw-bold mb-1 text-truncate px-2">{{ user.fullName }}</h5>
+              <p class="text-success small mb-1 text-truncate">{{ user.email }}</p>
+              <p class="text-muted small mb-2">{{ user.phone }}</p>
+              <div class="mt-auto">
+                <div class="badge px-3 py-2" [ngClass]="user.role === 'farmer' ? 'bg-success' : 'bg-primary'">
+                  {{ user.role }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section *ngIf="activePage==='machinery'" class="animate__animated animate__fadeIn">
+        <h2 class="fw-bold mb-4">Inventory Control</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="glass-card p-4 shadow-sm bg-white rounded-4">
+              <h5 class="fw-bold mb-3 text-success">
+                <i class="fa-solid me-2" [ngClass]="isEditing ? 'fa-pen-to-square' : 'fa-plus-circle'"></i>
+                {{ isEditing ? 'Edit Equipment' : 'Add Equipment' }}
+              </h5>
+
+              <div class="mb-2">
+                <label class="small fw-bold text-muted">Item Name</label>
+                <input type="text" class="form-control" [(ngModel)]="newMachinery.name" placeholder="e.g. Mini Tractor">
+              </div>
+
+              <div class="mb-2">
+                <label class="small fw-bold text-muted">Price (₹)</label>
+                <input type="number" class="form-control" [(ngModel)]="newMachinery.price" placeholder="Price">
+              </div>
+
+              <div class="mb-2">
+                <label class="small fw-bold text-muted">Quantity</label>
+                <input type="number" class="form-control" [(ngModel)]="newMachinery.quantity" placeholder="Quantity">
+              </div>
+
+              <div class="mb-3">
+                <label class="small fw-bold text-muted">Category</label>
+                <select class="form-select" [(ngModel)]="newMachinery.category">
+                  <option value="">Category...</option>
+                  <option value="Tractor">Tractor</option>
+                  <option value="Tools">Tools</option>
+                  <option value="Irrigation">Irrigation</option>
+                  <option value="Seeds">Seeds</option>
+                  <option value="Fertilizer">Fertilizer</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label class="small fw-bold text-muted">Image URL</label>
+                <input type="text" class="form-control" [(ngModel)]="newMachinery.image" placeholder="https://...">
+              </div>
+
+              <div class="d-flex gap-2 mt-4">
+                <button class="btn btn-success flex-grow-1 py-2 fw-bold" (click)="handleItemAddOrUpdate()">
+                  {{ isEditing ? 'Update Item' : 'Save to Catalog' }}
+                </button>
+                <button *ngIf="isEditing" class="btn btn-outline-success my-2" (click)="resetForm()">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-8 animate__animated animate__fadeInUp">
+
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <div class="stats-card bg-white p-4 rounded-4 shadow-sm border-start border-success border-5">
+                  <small class="text-muted fw-bold text-uppercase">Warehouse Value</small>
+                  <h2 class="fw-bold mb-0">₹{{ getTotalValue() | number }}</h2>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="stats-card bg-white p-4 rounded-4 shadow-sm border-start border-warning border-5">
+                  <small class="text-muted fw-bold text-uppercase">Items Tracked</small>
+                  <h2 class="fw-bold mb-0">{{ machineries.length }}</h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-card rounded-4 shadow-lg border-0 overflow-hidden">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 bg-white">
+                  <thead class="bg-light">
+                    <tr class="text-uppercase small fw-bold">
+                      <th class="px-4 py-4">Stock Identity</th>
+                      <th class="py-4">Type</th>
+                      <th class="py-4 text-center">In Stock</th>
+                      <th class="py-4">Valuation</th>
+                      <th class="pe-4 py-4 text-end">Manage</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of machineries" class="stock-row">
+                      <td class="px-4">
+
+                        <div class="d-flex align-items-center gap-3">
+                          <img [src]="item.image || 'https://via.placeholder.com/40'" class="rounded shadow-sm" style="width: 40px; height: 40px; object-fit: cover;">
+                          <div>
+                            <strong class="text-dark">{{ item.name }}</strong><br>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <span class="badge rounded-pill bg-success bg-opacity-10 text-success px-3 border border-success border-opacity-25">
+                          {{ item.category }}
+                        </span>
+                      </td>
+                      <td class="text-center fw-bold fs-5 text-dark">{{ item.quantity }}</td>
+                      <td>
+                        <div class="fw-bold text-dark">₹{{ (item.quantity * item.price) | number }}</div>
+                        <div class="small text-muted">₹{{ item.price | number }}</div>
+                      </td>
+                      <td class="pe-4 text-end">
+                        <button class="btn btn-light btn-sm me-2 text-primary" (click)="editItem(item)">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="btn btn-light btn-sm text-danger" (click)="handleItemRemove(item.id)">
+                          <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div *ngIf="machineries.length === 0" class="p-5 text-center">
+                  <i class="fa-solid fa-box-open display-1 text-light mb-3"></i>
+                  <h4 class="text-muted">Warehouse is empty</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>

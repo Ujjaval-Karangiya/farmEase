@@ -38,7 +38,7 @@ import { RouterLink } from '@angular/router'
             <button type="button"routerLink="/" class="btn btn-success btn-lg px-5 rounded-pill btn-hover-grow fw-bold shadow-sm">
               Start Free Trial
             </button>
-            <button type="button" routerLink="/About"class="btn btn-outline-warnin btn-lg px-5 rounded-pill btn-hover-grow border-2">
+            <button type="button" routerLink="/About"class="btn btn-outline-warning btn-lg px-5 rounded-pill btn-hover-grow border-2">
               Explore Features
             </button>
           </div>

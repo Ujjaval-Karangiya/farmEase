@@ -1,0 +1,153 @@
+:root {
+  --primary-green: #27ae60;
+  --bg-light: #f4f7f6;
+  --sidebar-dark: #1a1c1e;
+  --sidebar-width: 260px;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+}
+
+/* Base Layout */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-light);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Sidebar: Deep Graphite with Neon Green Accents */
+.nav-side {
+  width: var(--sidebar-width);
+  background: rgba(0, 0, 0, 0.9);
+  position: relative;
+  height: 100vh;
+  z-index: 1050;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-header {
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+  .sidebar-header h4 {
+    letter-spacing: 1px;
+    font-size: 1.4rem;
+  }
+
+/* Navigation Buttons: Pill Shape */
+.nav-btn {
+  background: transparent;
+  color: #a0aec0;
+  padding: 0.8rem 1.2rem;
+  border-radius: 50px; /* Pill shape */
+  margin: 0.3rem 1rem;
+  font-weight: 500;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+  .nav-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .nav-btn.active {
+    background: var(--primary-green) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+  }
+
+/* Main Content Area */
+.admin-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding: 2rem;
+}
+
+/* Statistics Cards: Minimalist */
+.glass-stat-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+  .glass-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    border-color: var(--primary-green);
+  }
+
+/* Tables: Modern and Airy */
+.table {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+  .table thead th {
+    background: #f8fafc;
+    color: #64748b;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 1rem;
+    border: none;
+  }
+
+.stock-row td {
+  padding: 1.2rem 1rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.stock-row:hover {
+  background-color: #fafbfc !important;
+}
+
+/* Form Styling: Clean and Sharp */
+.form-control, .form-select {
+  border: 2px solid #edf2f7;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  transition: border-color 0.2s;
+}
+
+  .form-control:focus {
+    border-color: var(--primary-green);
+    box-shadow: none;
+  }
+
+/* Badges */
+.badge {
+  padding: 0.5em 1em;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+/* Responsive Mobile Toggle */
+@media (max-width: 991px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+    .sidebar.mobile-open {
+      transform: translateX(0);
+    }
+
+  .admin-content {
+    margin-left: 0;
+    padding: 1.5rem;
+  }
+
+  .mobile-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1100;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+}

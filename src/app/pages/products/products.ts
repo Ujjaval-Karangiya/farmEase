@@ -1,91 +1,76 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Card } from '../../Components/card/card';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-products',
+  standalone: true,
   imports: [CommonModule, Card],
   templateUrl: './products.html',
   styleUrl: './products.css',
 })
-export class Products {
-  isLoading:any=true;
-  products: any[] = [
+export class Products implements OnInit {
+  isLoading: boolean = true;
+  products: any[] = [];
 
-    {
-      title: 'Organic Wheat Seeds',
-      subtitle: 'High Yield Variety',
-      description: 'Premium quality organic wheat seeds suitable for all soil types. High germination rate and disease resistant.',
-      imageUrl: 'assets/products/wheat-seeds.jpg',
-      label: 'Best Seller',
-      metaText: '₹450 / 10kg',
-      date: 'Available Now',
-      buttonText: 'View Details',
-      link: '/products/wheat-seeds',
-      action: () => this.viewProduct('Organic Wheat Seeds')
-    },
-
-    {
-      title: 'Bio Fertilizer',
-      subtitle: 'Eco Friendly',
-      description: 'Improves soil fertility naturally and increases crop productivity without harmful chemicals.',
-      imageUrl: 'assets/products/bio-fertilizer.jpg',
-      label: 'Organic',
-      metaText: '₹299 / bag',
-      date: 'In Stock',
-      buttonText: 'View Details',
-      link: '/products/bio-fertilizer',
-      action: () => this.viewProduct('Bio Fertilizer')
-    },
-
-    {
-      title: 'Drip Irrigation Kit',
-      subtitle: 'Water Saving Solution',
-      description: 'Complete drip irrigation kit ideal for farms. Saves water and improves crop growth efficiency.',
-      imageUrl: 'assets/products/drip-kit.jpg',
-      label: 'New',
-      metaText: '₹2,999',
-      date: 'Limited Stock',
-      buttonText: 'View Details',
-      link: '/products/drip-kit',
-      action: () => this.viewProduct('Drip Irrigation Kit')
-    },
-
-    {
-      title: 'Organic Pesticide',
-      subtitle: 'Safe Crop Protection',
-      description: 'Natural pesticide that protects crops from insects without harming soil or environment.',
-      imageUrl: 'assets/products/pesticide.jpg',
-      label: 'Eco Safe',
-      metaText: '₹199',
-      date: 'Available',
-      buttonText: 'View Details',
-      link: '/products/pesticide',
-      action: () => this.viewProduct('Organic Pesticide')
-    },
-
-    {
-      title: 'Tractor Sprayer',
-      subtitle: 'Heavy Duty Equipment',
-      description: 'Efficient tractor-mounted sprayer for fast and uniform spraying across large farms.',
-      imageUrl: 'assets/products/sprayer.jpg',
-      label: 'Popular',
-      metaText: '₹8,500',
-      date: 'In Stock',
-      buttonText: 'View Details',
-      link: '/products/sprayer',
-      action: () => this.viewProduct('Tractor Sprayer')
-    }
-
+  // 1. Centralized Source of Truth
+  private readonly SOURCES = [
+    { key: 'all_agri_items', type: 'Agri' },
+    { key: 'all_agri_inventories', type: 'Machinery' }
   ];
-  refreshProducts(){}
 
-  viewProduct(productName: string): void {
-    console.log('Viewing product:', productName);
-    alert('Viewing: ' + productName);
+  ngOnInit(): void {
+    this.refreshProducts();
   }
 
-  handleImageError(event: any): void {
-    event.target.src = 'logo.png';
+  refreshProducts(): void {
+    this.isLoading = true;
+    this.products = []; // Clear current list to force UI refresh
+
+    try {
+      const allItems: any[] = [];
+
+      // 2. Extract and Combine
+      this.SOURCES.forEach(source => {
+        const data = localStorage.getItem(source.key);
+        if (data) {
+          const parsed = JSON.parse(data);
+          // Add a 'sourceType' to help the UI differentiate if needed
+          const typedData = parsed.map((item: any) => ({ ...item, sourceType: source.type }));
+          allItems.push(...typedData);
+        }
+      });
+
+      // 3. Transform to Card Interface
+      this.products = allItems.map(item => this.mapToCard(item));
+
+      console.log('Successfully fetched products:', this.products.length);
+
+    } catch (err) {
+      console.error('Failed to fetch from LocalStorage:', err);
+    } finally {
+      // Small delay to ensure Angular's change detection catches the update
+      setTimeout(() => (this.isLoading = false), 300);
+    }
+  }
+
+  // 4. Dedicated Mapper (Handles Different Interfaces)
+  private mapToCard(item: any) {
+    return {
+      title: item.name || 'Untitled Product',
+      subtitle: item.sourceType === 'Machinery' ? `Machinery (${item.condition})` : item.category,
+      description: item.description || `High-quality ${item.name} available now.`,
+      imageUrl: item.image || 'assets/products/placeholder.jpg',
+      label: item.quantity > 0 ? 'In Stock' : 'Out of Stock',
+      metaText: `₹${item.price}`,
+      buttonText: 'View Details',
+      link: `/products/${item.id}`,
+      action: () => this.viewProduct(item.name)
+    };
+  }
+
+  viewProduct(name: string) {
+    console.log('Navigating to:', name);
+    alert('Viewing details for: ' + name);
   }
 }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg sticky-top glass-navbar-dark border-bottom border-white border-opacity-10 py-3">
+<nav class="navbar navbar-expand-lg sticky-top glass-navbar-dark border-bottom border-white border-opacity-10 p-1">
   <div class="container">
 
     <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-light" routerLink="/">
@@ -16,13 +16,16 @@
       <ul class="navbar-nav mx-auto gap-1">
         <li class="nav-item">
           <a class="nav-link fw-semibold px-3 nav-animated" routerLink="/" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}">Home</a>
+             [routerLinkActiveOptions]="{exact: true}">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link fw-semibold px-3 nav-animated" routerLink="/About" routerLinkActive="active">About</a>
         </li>
         <li class="nav-item" *ngIf="auth.isLoggedIn()">
           <a class="nav-link fw-semibold px-3 nav-animated" routerLink="/Products" routerLinkActive="active">Products</a>
+        </li>
+        <li class="nav-item" *ngIf="auth.isLoggedIn()">
+          <a class="nav-link fw-semibold px-3 nav-animated" *ngIf="auth.isLoggedIn() && currentUser?.role === 'admin'" routerLink="/admin/Admin" routerLinkActive="active">DashBoard</a>
         </li>
       </ul>
 
@@ -37,7 +40,7 @@
         </ng-container>
 
         <ng-container *ngIf="auth.isLoggedIn()">
-          <button class="btn btn-link text-light position-relative p-2 nav-animated shadow-none" routerLink="/Cart">
+          <button *ngIf="auth.isLoggedIn() && currentUser?.role !== 'admin'"class="btn btn-link text-light position-relative p-2 nav-animated shadow-none" routerLink="/Cart">
             <i class="fa-solid fa-cart-shopping fs-5"></i>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark border border-2 border-dark" style="font-size: 0.65rem;">
               0
@@ -54,7 +57,12 @@
     </div>
   </div>
 </nav>
-<div class="offcanvas offcanvas-end border-0 shadow-lg" id="canva" style="width:360px; background:#f8faf8;" *ngIf="currentUser">
+<div class="offcanvas offcanvas-end border-0 shadow-lg"
+     id="canva"
+     tabindex="-1"
+     aria-labelledby="canva"
+     style="width:360px; background:#f8faf8;">
+
   <div class="offcanvas-header border-bottom bg-white py-4">
     <div class="d-flex align-items-center gap-2">
       <div class="bg-success rounded-pill p-2"><i class="fa-solid fa-wheat-awn text-white"></i></div>
@@ -66,47 +74,99 @@
     <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"></button>
   </div>
 
-  <div class="offcanvas-body d-flex flex-column p-4 gap-4">
+  <div class="offcanvas-body d-flex flex-column p-4 gap-4 z-1">
     <div class="p-3 rounded-4 shadow-sm border border-white bg-white animate__animated animate__fadeIn">
-      <div class="d-flex align-items-center gap-3 mb-3">
-        <img [src]="'https://ui-avatars.com/api/?name=' + currentUser.name + '&background=2e7d32&color=fff&bold=true'"
-          class="rounded-circle  border-2 border-success shadow-sm" 
-          style="width:55px; height:55px; object-fit: cover;" alt="Farmer Profile" />
-        <div class="overflow-hidden">
-          <div class="fw-bold text-dark text-truncate">{{ currentUser?.name | titlecase }}</div>
-          <small class="text-secondary text-truncate d-block small">{{ currentUser?.email }}</small>
+      <div class="sidebar-profile-wrapper">
+
+        <div class="user-profile-card d-flex align-items-center gap-3">
+
+          <img [src]="currentUser?.fullName
+        ? 'https://ui-avatars.com/api/?name=' + (currentUser.fullName) + '&background=2e7d32&color=fff&bold=true'
+        : 'https://ui-avatars.com/api/?name=Guest&background=a5d6a7&color=fff'"
+               class="profile-avatar"
+               alt="User Profile" />
+
+          <div class="flex-grow-1 overflow-hidden">
+            <div class="fw-bold profile-name text-truncate">
+              {{ (currentUser?.fullName || 'FarmEase User')| titlecase }}
+            </div>
+            <small class="profile-email text-truncate d-block">
+              {{ currentUser?.email || 'No email provided' }}
+            </small>
+          </div>
+
+          <span class="badge profile-role text-capitalize">
+            {{ currentUser?.role || 'User' }}
+          </span>
+
         </div>
-      </div>
-      <div class="d-flex gap-2">
-        <button class="btn btn-outline-dark btn-sm w-50 rounded-pill fw-bold" routerLink="/Profile"data-bs-dismiss="offcanvas">
-          View Details
-        </button>
-        <button class="btn btn-outline-danger btn-sm w-50 rounded-pill fw-bold" (click)="logout()" data-bs-dismiss="offcanvas">
-          <i class="fa-solid fa-right-from-bracket me-1"></i> Log Out
-        </button>
-      </div>
-    </div>
 
-    <div>
-      <small class="text-uppercase text-muted fw-bold mb-3 d-block ls-2" style="font-size: 0.7rem;">Field Management</small>
+        <div class="profile-actions d-flex gap-2 mt-3">
+          <button class="btn btn-view w-50 rounded-pill fw-bold"
+                  routerLink="/Profile"
+                  data-bs-dismiss="offcanvas">
+            View Details
+          </button>
+
+          <button class="btn btn-logout w-50 rounded-pill fw-bold"
+                  (click)="logout()"
+                  data-bs-dismiss="offcanvas">
+            <i class="fa-solid fa-right-from-bracket me-1"></i>
+            Log Out
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+    <div *ngIf="auth.isLoggedIn() && currentUser?.role !== 'admin'">
+
+      <small class="text-uppercase text-muted fw-bold mb-3 d-block ls-2"
+             style="font-size: 0.7rem;">
+        Field Management
+      </small>
+
       <div class="list-group list-group-flush rounded-4 overflow-hidden border shadow-sm bg-white">
-        <a routerLink="/News" routerLinkActive="active" 
-           class="list-group-item list-group-item-action border-0 d-flex align-items-center gap-3 py-3 px-4 fw-semibold" data-bs-dismiss="offcanvas">
-          <i class="fa-solid fa-newspaper text-success opacity-75"></i> Agri News
+
+        <a routerLink="/News"
+           routerLinkActive="active"
+           class="list-group-item list-group-item-action border-0 d-flex align-items-center gap-3 py-3 px-4 fw-semibold"
+           data-bs-dismiss="offcanvas">
+          <i class="fa-solid fa-newspaper text-success opacity-75"></i>
+          Agri News
         </a>
-        <a routerLink="/DataComponent" routerLinkActive="active" 
-           class="list-group-item list-group-item-action border-0 d-flex align-items-center gap-3 py-3 px-4 fw-semibold" data-bs-dismiss="offcanvas">
-          <i class="fa-solid fa-snowflake text-primary opacity-75"></i> Cold Storage
+
+        <a routerLink="/DataComponent"
+           routerLinkActive="active"
+           class="list-group-item list-group-item-action border-0 d-flex align-items-center gap-3 py-3 px-4 fw-semibold"
+           data-bs-dismiss="offcanvas">
+          <i class="fa-solid fa-snowflake text-primary opacity-75"></i>
+          Cold Storage
         </a>
-        <a routerLink="/ItemManagerComponent" routerLinkActive="active" 
-           class="list-group-item list-group-item-action border-0 d-flex align-items-center gap-3 py-3 px-4 fw-semibold" data-bs-dismiss="offcanvas">
-          <i class="fa-solid fa-boxes-stacked text-warning opacity-75"></i> Stock Inventory
+
+        <a routerLink="/ItemManagerComponent"
+           routerLinkActive="active"
+           class="list-group-item list-group-item-action border-0 d-flex align-items-center gap-3 py-3 px-4 fw-semibold"
+           data-bs-dismiss="offcanvas">
+          <i class="fa-solid fa-boxes-stacked text-warning opacity-75"></i>
+          Stock Inventory
         </a>
+
+          <a routerLink="/Modal"
+             routerLinkActive="active"
+             class="list-group-item list-group-item-action border-0 d-flex align-items-center gap-3 py-3 px-4 fw-semibold"
+             data-bs-dismiss="offcanvas">
+            <i class="fa-solid fa-inbox" style="color: rgba(37, 134, 49, 1.00);"></i>
+        Add Products
+          </a>
+
+
       </div>
     </div>
 
-    <div class="mt-auto p-4 rounded-4 text-center border-0 shadow-sm"
-      style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-left: 4px solid #2e7d32 !important;">
+
+    <div class=" p-4 rounded-4 text-center border-0 shadow-sm"
+         style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-left: 4px solid #2e7d32 !important;">
       <p class="mb-1 fw-bold text-success"><i class="fa-solid fa-cloud-sun-rain me-2"></i>Monsoon Special</p>
       <p class="small text-dark mb-3">20% off Organic Fertilizers</p>
       <button class="btn btn-success btn-sm rounded-pill w-100 fw-bold shadow-sm">View Offers</button>

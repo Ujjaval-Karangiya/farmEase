@@ -1,4 +1,4 @@
-<footer class="genz-footer mt-auto" *ngIf="auth.isLoggedIn()">
+<footer class="genz-footer mt-auto" *ngIf="auth.isLoggedIn() && currentUser?.role !== 'admin'">
   <div class="container">
     
     <div class="glow-line animate-pulse"></div>

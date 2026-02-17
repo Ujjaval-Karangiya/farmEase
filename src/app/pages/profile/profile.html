@@ -8,7 +8,7 @@
           <div class="card-body p-4 p-md-5 pt-0 text-center position-relative">
             
             <div class="avatar-container">
-              <img [src]="'https://ui-avatars.com/api/?name=' + currentUser.name + '&background=2e7d32&color=fff&size=150&bold=true'"
+              <img [src]="'https://ui-avatars.com/api/?name=' + currentUser.fullName + '&background=2e7d32&color=fff&size=150&bold=true'"
                    alt="Farmer Profile"
                    class="img-fluid rounded-circle shadow-lg mb-3 border border-5 border-white bg-white avatar-main">
               <div class="verified-badge" title="Verified Farmer">
@@ -16,7 +16,7 @@
               </div>
             </div>
 
-            <h1 class="display-6 fw-bold text-dark mb-1">{{ currentUser.name | titlecase }}</h1>
+            <h1 class="display-6 fw-bold text-dark mb-1">{{ currentUser.fullName | titlecase }}</h1>
             <p class="text-success fw-bold text-uppercase ls-1 small mb-4">
               <i class="fa-solid fa-seedling me-2"></i>Verified FarmEase Member
             </p>
@@ -29,7 +29,7 @@
           </div>
         </div>
 
-        <div class="row g-4 mb-5">
+        <div class="row g-4 mb-5" *ngIf="currentUser?.role !== 'admin'">
           <div class="col-md-4">
             <div class="card action-card p-4 rounded-4 shadow-sm border-0 h-100 text-center transition-all bg-white" routerLink="/Cart">
               <div class="icon-box bg-warning-subtle text-warning mx-auto mb-3 rounded-circle d-flex align-items-center justify-content-center">

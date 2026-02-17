@@ -24,11 +24,11 @@
       <div class="brand-badge mb-4">
         <i class="fa-solid fa-shield-halved me-2"></i>Secure Login
       </div>
-      
+
       <h2 class="fw-bold text-dark mb-1">Log In</h2>
       <p class="text-muted mb-4">Enter your credentials to manage your field.</p>
 
-      <form>
+      <form (submit)="$event.preventDefault()">
         <div class="custom-input-group mb-4">
           <input type="email" #email required placeholder=" ">
           <label><i class="fa-solid fa-envelope me-2"></i>Email Address</label>
@@ -49,13 +49,13 @@
           <a href="#" class="text-success small fw-bold text-decoration-none transition-all">Forgot Password?</a>
         </div>
 
-        <button type="button" class="btn btn-success btn-login w-100 py-3 rounded-4 fw-bold shadow-sm mb-4" 
+        <button type="submit" class="btn btn-success btn-login w-100 py-3 rounded-4 fw-bold shadow-sm mb-4"
                 (click)="login(email.value, password.value)">
           Login Now
         </button>
 
         <div class="auth-footer text-center text-muted small">
-          Don’t have an account? 
+          Don’t have an account?
           <a routerLink="/Signup" class="text-success fw-bold text-decoration-none ms-1">Create Account</a>
         </div>
       </form>

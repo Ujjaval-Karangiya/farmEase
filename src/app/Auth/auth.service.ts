@@ -1,25 +1,27 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthService {
-  getCurrentUser() {
-      throw new Error('Method not implemented.');
-  }
-  user$: any;
+export type UserRole = 'admin' | 'farmer' | 'customer';
 
-  login() {
-    localStorage.setItem('token', 'abc123');
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+
+  private currentUser: { name: string; role: UserRole } | null = null;
+
+  login(role: UserRole) {
+    this.currentUser = { name: 'User', role };
+    localStorage.setItem('user_role', role);
   }
 
   logout() {
-    localStorage.removeItem('token');
+    this.currentUser = null;
+    localStorage.removeItem('user_role');
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    return !!this.getRole();
+  }
+
+  getRole(): UserRole | null {
+    return (localStorage.getItem('user_role') as UserRole) || null;
   }
 }
-
-

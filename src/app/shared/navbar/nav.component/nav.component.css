@@ -3,8 +3,97 @@
   background: rgba(15, 20, 15, 0.85); /* Deep dark forest tint */
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  z-index: 1050;
+
 }
+/* ===== Sidebar Wrapper ===== */
+.sidebar-profile-wrapper {
+  padding: 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* ===== Profile Card ===== */
+.user-profile-card {
+  background: linear-gradient(135deg, #f1f8f4, #e8f5e9);
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(46, 125, 50, 0.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+  .user-profile-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(46, 125, 50, 0.15);
+  }
+
+/* ===== Avatar ===== */
+.profile-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 3px solid #2e7d32;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.user-profile-card:hover .profile-avatar {
+  transform: scale(1.05);
+}
+
+/* ===== Text ===== */
+.profile-name {
+  font-size: 0.95rem;
+  color: #1b5e20;
+  letter-spacing: 0.4px;
+}
+
+.profile-email {
+  font-size: 0.8rem;
+  color: #607d68;
+}
+
+/* ===== Role Badge ===== */
+.profile-role {
+  background: #2e7d32;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  border-radius: 50px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
+}
+
+/* ===== Buttons ===== */
+.profile-actions .btn {
+  font-size: 0.8rem;
+  transition: all 0.25s ease;
+}
+
+/* View Button */
+.btn-view {
+  border: 2px solid #2e7d32;
+  color: #2e7d32;
+  background: transparent;
+}
+
+  .btn-view:hover {
+    background: #2e7d32;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+/* Logout Button */
+.btn-logout {
+  border: 2px solid #c62828;
+  color: #c62828;
+  background: transparent;
+}
+
+  .btn-logout:hover {
+    background: #c62828;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
 
 .ls-1 { letter-spacing: -0.5px; }
 

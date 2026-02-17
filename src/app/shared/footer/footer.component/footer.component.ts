@@ -14,5 +14,14 @@ export class FooterComponent {
   // Dynamic year for the copyright
   year: number = new Date().getFullYear();
 
+  currentUser: any = null;
   constructor(public auth: AuthService) { }
+ 
+
+  ngOnInit(): void {
+    const storedData = localStorage.getItem("CurrentUser");
+    if (storedData) {
+      this.currentUser = JSON.parse(storedData);
+    }
+  }
 }

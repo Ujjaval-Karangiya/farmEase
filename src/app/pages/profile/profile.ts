@@ -2,18 +2,19 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Auth/auth.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './profile.html',
   styleUrls: ['./profile.css']
 })
 export class Profile implements OnInit {
   currentUser: any = null;
   private router = inject(Router);
-  private auth = inject(AuthService);
+  public auth = inject(AuthService);
 
   ngOnInit(): void {
     const storedUser = localStorage.getItem('CurrentUser');
