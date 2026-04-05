@@ -1,0 +1,14 @@
+namespace backEnd.DTOs;
+
+public class AgriItemDto
+{
+    public long Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Category { get; set; } = string.Empty;
+    public int Quantity { get; set; }
+    public decimal Price { get; set; }
+    public string Description { get; set; } = string.Empty;
+    public string? Image { get; set; }
+    public string PostedBy { get; set; } = string.Empty;
+    public string SaleType { get; set; } = "B2C";
+}
